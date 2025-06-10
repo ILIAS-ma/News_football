@@ -1153,96 +1153,33 @@
         </div>
       </section>
     </main>
-    <footer
-      class="footer"
-      style="
-        background: #fff;
-        box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.06);
-        padding: 2.5rem 0 1.5rem 0;
-        margin-top: 4rem;
-      "
-    >
-      <div
-        class="container"
-        style="
-          display: flex;
-          flex-wrap: wrap;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 2rem;
-        "
-      >
-        <!-- Logo/Nom -->
-        <div
-          style="
-            min-width: 180px;
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-          "
-        >
-          <span
-            style="
-              font-weight: bold;
-              font-size: 1.25rem;
-              color: #1e293b;
-              letter-spacing: 1px;
-            "
-            >Football News</span
+    <footer class="footer">
+      <div class="footer-content">
+        <a href="index.html" class="footer-logo">
+          <span class="footer-logo-icon">FN</span>
+          <span class="footer-logo-text">Football News</span>
+        </a>
+        <ul class="footer-links">
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#histoire">Histoire</a></li>
+          <li><a href="index.html#videos">Vidéos</a></li>
+        </ul>
+        <a href="login.html" class="admin-login-btn" id="adminLoginBtn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-        </div>
-        <!-- Liens -->
-        <nav
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            flex: 1;
-          "
-        >
-          <div style="display: flex; gap: 2rem">
-            <a
-              href="index.html#news"
-              style="color: #1e293b; text-decoration: none; font-weight: 500"
-              >News</a
-            >
-            <a
-              href="index.html#histoire"
-              style="color: #1e293b; text-decoration: none; font-weight: 500"
-              >Histoire</a
-            >
-            <a
-              href="index.html#videos"
-              style="color: #1e293b; text-decoration: none; font-weight: 500"
-              >Vidéos</a
-            >
-          </div>
-        </nav>
-        <!-- Contact -->
-        <div
-          style="
-            min-width: 220px;
-            text-align: right;
-            color: #334155;
-            font-size: 1rem;
-          "
-        >
-          <div><strong>Contact</strong></div>
-          <div>📞 01 23 45 67 89</div>
-          <div>✉️ contact@footballnews.fr</div>
-          <div>🏢 10 rue du Stade, 75000 Paris</div>
-        </div>
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #64748b;
-          font-size: 0.98rem;
-          margin-top: 1.5rem;
-        "
-      >
-        &copy; 2024 Football News. Tous droits réservés.
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+            />
+          </svg>
+          Administration
+        </a>
       </div>
     </footer>
     <script src="app.js"></script>
@@ -1251,6 +1188,24 @@
         const logoutButton = document.getElementById("logoutButton");
         if (logoutButton) logoutButton.style.display = "none";
       });
+    </script>
+    <script>
+      // Gestion du bouton admin
+      const adminLoginBtn = document.getElementById("adminLoginBtn");
+      const token = localStorage.getItem("token");
+
+      if (adminLoginBtn) {
+        if (token) {
+          adminLoginBtn.href = "admin.html";
+          adminLoginBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Dashboard Admin
+          `;
+        }
+      }
     </script>
   </body>
 </html>
