@@ -3,8 +3,94 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>News Foot</title>
+    <meta
+      name="description"
+      content="Football News - Votre source d'actualités football, analyses de matchs, et histoire du football"
+    />
+    <meta
+      name="keywords"
+      content="football, news, actualités, matchs, analyses, histoire du football"
+    />
+    <meta name="author" content="ILIAS-ma" />
+    <meta name="theme-color" content="#3b82f6" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://football-news.vercel.app/" />
+    <meta property="og:title" content="Football News - Actualités Football" />
+    <meta
+      property="og:description"
+      content="Votre source d'actualités football, analyses de matchs, et histoire du football"
+    />
+    <meta
+      property="og:image"
+      content="https://football-news.vercel.app/assets/og-image.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://football-news.vercel.app/" />
+    <meta
+      property="twitter:title"
+      content="Football News - Actualités Football"
+    />
+    <meta
+      property="twitter:description"
+      content="Votre source d'actualités football, analyses de matchs, et histoire du football"
+    />
+    <meta
+      property="twitter:image"
+      content="https://football-news.vercel.app/assets/og-image.jpg"
+    />
+
+    <title>Football News - Actualités Football</title>
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon.png"
+    />
+
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Service Worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((registration) => {
+              console.log("ServiceWorker registration successful");
+            })
+            .catch((err) => {
+              console.log("ServiceWorker registration failed: ", err);
+            });
+        });
+      }
+    </script>
     <style>
       :root {
         --accent-color: #3b82f6;
