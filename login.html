@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - News Foot</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--light-bg);
+      }
+
+      .login-form {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .login-form h1 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+      }
+
+      .login-button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .login-button:hover {
+        background-color: var(--secondary-color);
+      }
+
+      .login-error {
+        color: #e53e3e;
+        background-color: #fff5f5;
+        padding: 0.75rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        display: none;
+      }
+
+      .login-error.show {
+        display: block;
+      }
+
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        color: var(--accent-color);
+        text-decoration: none;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <form class="login-form" id="loginForm">
+        <h1>News Foot - Connexion</h1>
+        <div class="login-error" id="loginError">Mot de passe incorrect</div>
+        <div class="form-group">
+          <label for="password">Mot de passe administrateur</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            autocomplete="current-password"
+            placeholder="Entrez votre mot de passe"
+          />
+        </div>
+        <button type="submit" class="login-button">Se connecter</button>
+        <a href="index.html" class="back-link">Retour à l'accueil</a>
+      </form>
+    </div>
+    <script src="login.js"></script>
+  </body>
+</html>

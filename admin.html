@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Foot - Administration</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      :root {
+        --accent-color: #3b82f6;
+        --bg-dark: #000;
+        --bg-card: #181818;
+        --text-primary: #fff;
+        --text-secondary: #b0b0b0;
+        --border-color: #222;
+        --bg-light: #f8fafc;
+        --bg-card-light: #e5e7eb;
+        --text-primary-light: #1e293b;
+        --text-secondary-light: #334155;
+        --border-color-light: #cbd5e1;
+      }
+
+      body[data-theme="light"] {
+        --bg-dark: #f8fafc;
+        --bg-card: #fff;
+        --text-primary: #1e293b;
+        --text-secondary: #334155;
+        --border-color: #cbd5e1;
+      }
+
+      html,
+      body {
+        background: var(--bg-dark) !important;
+        color: var(--text-primary) !important;
+        min-height: 100vh;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      /* Navbar styles */
+      .navbar.minimal-navbar {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        box-shadow: none;
+        padding: 0.5rem 0;
+      }
+
+      body[data-theme="dark"] .navbar.minimal-navbar {
+        background: #111;
+        border-bottom: 1px solid #222;
+      }
+
+      .nav-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+      }
+
+      .logo-text {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #111;
+        letter-spacing: 1px;
+      }
+
+      body[data-theme="dark"] .logo-text {
+        color: #fff;
+      }
+
+      .nav-links.nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-links.nav-right a {
+        color: #111;
+        background: none;
+        font-size: 1.08rem;
+        font-weight: 500;
+        border: none;
+        border-radius: 0;
+        text-decoration: none !important;
+        padding: 0.5rem 0.7rem;
+        position: relative;
+        transition: none;
+        cursor: pointer;
+      }
+
+      body[data-theme="dark"] .nav-links.nav-right a {
+        color: #fff;
+      }
+
+      .nav-links.nav-right a::after {
+        display: none !important;
+      }
+
+      .burger-btn {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+        margin-left: 0.5rem;
+      }
+
+      .burger-bar {
+        width: 24px;
+        height: 3px;
+        background: #111;
+        margin: 3px 0;
+        border-radius: 2px;
+        transition: background 0.2s;
+      }
+
+      body[data-theme="dark"] .burger-bar {
+        background: #fff;
+      }
+
+      @media (max-width: 800px) {
+        .nav-links.nav-right {
+          gap: 0.7rem;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .burger-btn {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 80vw;
+          max-width: 340px;
+          height: 100vh;
+          background: #f8fafc;
+          box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+          border-top-left-radius: 18px;
+          border-bottom-left-radius: 18px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          transform: translateX(100vw);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 1000;
+        }
+
+        body[data-theme="dark"] .nav-menu {
+          background: #181818;
+        }
+
+        .nav-menu.open {
+          transform: translateX(0);
+        }
+
+        .nav-links.nav-right {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 2rem;
+          margin-top: 5rem;
+          width: 100%;
+        }
+
+        .nav-links.nav-right li {
+          width: 100%;
+          text-align: left;
+        }
+
+        .nav-links.nav-right a,
+        .nav-links.nav-right button {
+          width: 100%;
+          font-size: 1.2rem;
+          padding: 1.1rem 0 1.1rem 1.2rem;
+          border-radius: 8px;
+          box-shadow: none;
+          color: #111 !important;
+          background: none;
+          text-align: left;
+        }
+
+        body[data-theme="dark"] .nav-links.nav-right a,
+        body[data-theme="dark"] .nav-links.nav-right button {
+          color: #fff !important;
+        }
+      }
+
+      @media (min-width: 701px) {
+        .nav-menu {
+          position: static;
+          transform: none;
+          background: none;
+          height: auto;
+          width: auto;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+
+        .nav-links.nav-right {
+          flex-direction: row;
+          gap: 1.5rem;
+          margin-top: 0;
+        }
+      }
+
+      /* Footer styles */
+      .footer {
+        background: #fff;
+        box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.06);
+        padding: 2.5rem 0 1.5rem 0;
+        margin-top: 4rem;
+      }
+
+      /* Dashboard styles */
+      .dashboard-content {
+        background: #fff;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+
+      .admin-title {
+        color: var(--accent-color);
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .add-button {
+        background-color: var(--accent-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .add-button:hover {
+        background-color: #3182ce;
+      }
+
+      .articles-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        margin-bottom: 2rem;
+      }
+
+      .articles-table th,
+      .articles-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .articles-table th {
+        background-color: var(--accent-color);
+        color: white;
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+
+      .articles-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .articles-table tr:hover {
+        background-color: #f1f5f9;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .edit-button,
+      .delete-button {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 0.98rem;
+        transition: background 0.2s, opacity 0.2s;
+      }
+
+      .edit-button {
+        background-color: var(--accent-color);
+        color: white;
+      }
+
+      .edit-button:hover {
+        background: #2563eb;
+      }
+
+      .delete-button {
+        background-color: #e53e3e;
+        color: white;
+      }
+
+      .delete-button:hover {
+        background: #b91c1c;
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: #fff;
+        border-radius: 10px;
+        padding: 2rem;
+        max-width: 500px;
+        width: 95vw;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        position: relative;
+      }
+
+      .close-button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #64748b;
+      }
+
+      .form-group {
+        margin-bottom: 1.3rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 5px;
+        font-size: 1rem;
+        background: #f8fafc;
+      }
+
+      .form-group textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+
+      .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .modal-buttons button {
+        padding: 0.7rem 1.3rem;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 1rem;
+      }
+
+      .save-button {
+        background-color: var(--accent-color);
+        color: white;
+      }
+
+      .cancel-button {
+        background-color: #e2e8f0;
+        color: #1e293b;
+      }
+
+      .thumbnail-preview {
+        max-width: 180px;
+        max-height: 180px;
+        margin-top: 0.5rem;
+        border-radius: 4px;
+        display: block;
+      }
+
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid #e5e7eb;
+        border-radius: 50%;
+        border-top-color: var(--accent-color);
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      @media (max-width: 900px) {
+        .dashboard-content {
+          padding: 1rem;
+        }
+        .articles-table th,
+        .articles-table td {
+          padding: 0.7rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .dashboard-content {
+          padding: 0.3rem;
+        }
+        .admin-title {
+          font-size: 1.1rem;
+        }
+        .add-button {
+          padding: 0.5rem 1rem;
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <nav
+      class="navbar minimal-navbar"
+      style="background: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08)"
+    >
+      <div class="container nav-flex" style="justify-content: flex-end">
+        <div class="navbar-logo logo-left" style="margin-right: auto">
+          <span class="logo-icon" id="logoIcon"></span>
+          <span class="logo-text" style="color: #111">Football News</span>
+        </div>
+        <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+        <div
+          class="nav-menu"
+          id="navMenu"
+          style="background: #fff; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1)"
+        >
+          <ul
+            class="nav-links nav-right"
+            id="navLinks"
+            style="justify-content: flex-end"
+          >
+            <li><a href="index.html#news" style="color: #111">News</a></li>
+            <li>
+              <a href="index.html#histoire" style="color: #111">Histoire</a>
+            </li>
+            <li><a href="index.html#videos" style="color: #111">Vidéos</a></li>
+            <li>
+              <a
+                href="admin.html"
+                id="adminLink"
+                style="display: none; color: #111"
+                >Administration</a
+              >
+            </li>
+            <li>
+              <a href="#" id="logoutButton" style="display: none; color: #111"
+                >Déconnexion</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="dashboard-main">
+      <main class="dashboard-content">
+        <section id="articles-section">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <h2 class="admin-title">Gestion des Articles</h2>
+            <button class="add-button" onclick="openModal()">
+              Ajouter un article
+            </button>
+          </div>
+          <table class="articles-table">
+            <thead>
+              <tr>
+                <th>Titre</th>
+                <th>Catégorie</th>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="articlesTableBody">
+              <!-- Les articles seront chargés ici dynamiquement -->
+            </tbody>
+          </table>
+        </section>
+        <section id="videos-section">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <h2 class="admin-title">Gestion des Vidéos</h2>
+            <button class="add-button" onclick="openVideoModal()">
+              Ajouter une vidéo
+            </button>
+          </div>
+          <table class="articles-table">
+            <thead>
+              <tr>
+                <th>Titre</th>
+                <th>Catégorie</th>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="videosTableBody">
+              <!-- Les vidéos seront chargées ici dynamiquement -->
+            </tbody>
+          </table>
+        </section>
+        <div class="loading-overlay" id="loadingOverlay">
+          <div class="loading-spinner"></div>
+        </div>
+
+        <!-- Section Gestion des Auteurs -->
+        <section id="authors-section" style="margin-top: 3rem">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <h2 class="admin-title">Gestion des Auteurs</h2>
+            <button class="add-button" onclick="openAuthorModal()">
+              Ajouter un auteur
+            </button>
+          </div>
+          <table class="articles-table">
+            <thead>
+              <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="authorsTableBody">
+              <!-- Les auteurs seront chargés ici dynamiquement -->
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Modal pour les articles -->
+        <div id="articleModal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Ajouter un article</h2>
+            <form id="articleForm">
+              <input type="hidden" id="articleId" />
+              <div class="form-group">
+                <label for="title">Titre</label>
+                <input type="text" id="title" required />
+              </div>
+              <div class="form-group">
+                <label for="category">Catégorie</label>
+                <select id="category" required>
+                  <!-- Les catégories seront chargées dynamiquement -->
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="author">Auteur</label>
+                <select id="author" required>
+                  <!-- Les auteurs seront chargés dynamiquement -->
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="content">Contenu</label>
+                <textarea id="content" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" id="image" accept="image/*" />
+                <img
+                  id="imagePreview"
+                  class="thumbnail-preview"
+                  style="display: none"
+                />
+              </div>
+              <div class="modal-buttons">
+                <button
+                  type="button"
+                  class="cancel-button"
+                  onclick="closeModal()"
+                >
+                  Annuler
+                </button>
+                <button type="submit" class="save-button">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Modal pour les vidéos -->
+        <div id="videoModal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" onclick="closeVideoModal()"
+              >&times;</span
+            >
+            <h2 id="videoModalTitle">Ajouter une vidéo</h2>
+            <form id="videoForm">
+              <input type="hidden" id="videoId" />
+              <div class="form-group">
+                <label for="videoTitle">Titre</label>
+                <input type="text" id="videoTitle" required />
+              </div>
+              <div class="form-group">
+                <label for="videoCategory">Catégorie</label>
+                <select id="videoCategory" required>
+                  <!-- Les catégories seront chargées dynamiquement -->
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="videoAuthor">Auteur</label>
+                <select id="videoAuthor" required>
+                  <!-- Les auteurs seront chargés dynamiquement -->
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="videoUrl">URL YouTube</label>
+                <input
+                  type="url"
+                  id="videoUrl"
+                  placeholder="https://www.youtube.com/watch?v=..."
+                  required
+                />
+                <div id="videoPreview" style="margin-top: 1rem; display: none">
+                  <iframe
+                    width="100%"
+                    height="200"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="videoDescription">Description</label>
+                <textarea id="videoDescription" required></textarea>
+              </div>
+              <div class="modal-buttons">
+                <button
+                  type="button"
+                  class="cancel-button"
+                  onclick="closeVideoModal()"
+                >
+                  Annuler
+                </button>
+                <button type="submit" class="save-button">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Modal pour les auteurs -->
+        <div id="authorModal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" onclick="closeAuthorModal()"
+              >&times;</span
+            >
+            <h2 id="authorModalTitle">Ajouter un auteur</h2>
+            <form id="authorForm">
+              <input type="hidden" id="authorId" />
+              <div class="form-group">
+                <label for="authorPrenom">Prénom</label>
+                <input type="text" id="authorPrenom" required />
+              </div>
+              <div class="form-group">
+                <label for="authorNom">Nom</label>
+                <input type="text" id="authorNom" required />
+              </div>
+              <div class="modal-buttons">
+                <button
+                  type="button"
+                  class="cancel-button"
+                  onclick="closeAuthorModal()"
+                >
+                  Annuler
+                </button>
+                <button type="submit" class="save-button">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div
+        class="container"
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 2rem;
+        "
+      >
+        <!-- Logo/Nom -->
+        <div
+          style="
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+          "
+        >
+          <span
+            style="
+              font-weight: bold;
+              font-size: 1.25rem;
+              color: #1e293b;
+              letter-spacing: 1px;
+            "
+            >Football News</span
+          >
+        </div>
+        <!-- Liens -->
+        <nav
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+          "
+        >
+          <div style="display: flex; gap: 2rem">
+            <a
+              href="index.html#news"
+              style="color: #1e293b; text-decoration: none; font-weight: 500"
+              >News</a
+            >
+            <a
+              href="index.html#histoire"
+              style="color: #1e293b; text-decoration: none; font-weight: 500"
+              >Histoire</a
+            >
+            <a
+              href="index.html#videos"
+              style="color: #1e293b; text-decoration: none; font-weight: 500"
+              >Vidéos</a
+            >
+          </div>
+        </nav>
+        <!-- Contact -->
+        <div
+          style="
+            min-width: 220px;
+            text-align: right;
+            color: #334155;
+            font-size: 1rem;
+          "
+        >
+          <div><strong>Contact</strong></div>
+          <div>📞 01 23 45 67 89</div>
+          <div>✉️ contact@footballnews.fr</div>
+          <div>🏢 10 rue du Stade, 75000 Paris</div>
+        </div>
+      </div>
+      <div
+        style="
+          text-align: center;
+          color: #64748b;
+          font-size: 0.98rem;
+          margin-top: 1.5rem;
+        "
+      >
+        &copy; 2024 Football News. Tous droits réservés.
+      </div>
+    </footer>
+
+    <script src="admin.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const burgerBtn = document.getElementById("burgerBtn");
+        const navMenu = document.getElementById("navMenu");
+        const navLinks = document.getElementById("navLinks");
+
+        if (burgerBtn && navMenu && navLinks) {
+          burgerBtn.addEventListener("click", () => {
+            navMenu.classList.toggle("open");
+            navLinks.classList.toggle("open");
+          });
+        }
+
+        const logoutButton = document.getElementById("logoutButton");
+        const token = localStorage.getItem("token");
+        if (logoutButton) {
+          if (token) {
+            logoutButton.style.display = "inline-block";
+            logoutButton.onclick = function (e) {
+              e.preventDefault();
+              localStorage.removeItem("token");
+              window.location.href = "login.html";
+            };
+          } else {
+            logoutButton.style.display = "none";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

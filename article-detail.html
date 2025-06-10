@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Article - Football News</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      :root {
+        --accent-color: #3b82f6;
+        --bg-dark: #000;
+        --bg-card: #181818;
+        --text-primary: #fff;
+        --text-secondary: #b0b0b0;
+        --border-color: #222;
+        --bg-light: #f8fafc;
+        --bg-card-light: #e5e7eb;
+        --text-primary-light: #1e293b;
+        --text-secondary-light: #334155;
+        --border-color-light: #cbd5e1;
+      }
+
+      body[data-theme="light"] {
+        --bg-dark: #f8fafc;
+        --bg-card: #fff;
+        --text-primary: #1e293b;
+        --text-secondary: #334155;
+        --border-color: #cbd5e1;
+      }
+
+      html,
+      body {
+        background: var(--bg-dark) !important;
+        color: var(--text-primary) !important;
+        min-height: 100vh;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      /* Navbar styles */
+      .navbar.minimal-navbar {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        box-shadow: none;
+        padding: 0.5rem 0;
+      }
+
+      body[data-theme="dark"] .navbar.minimal-navbar {
+        background: #111;
+        border-bottom: 1px solid #222;
+      }
+
+      .nav-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+      }
+
+      .logo-text {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #111;
+        letter-spacing: 1px;
+      }
+
+      body[data-theme="dark"] .logo-text {
+        color: #fff;
+      }
+
+      .nav-links.nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-links.nav-right a {
+        color: #111;
+        background: none;
+        font-size: 1.08rem;
+        font-weight: 500;
+        border: none;
+        border-radius: 0;
+        text-decoration: none !important;
+        padding: 0.5rem 0.7rem;
+        position: relative;
+        transition: none;
+        cursor: pointer;
+      }
+
+      body[data-theme="dark"] .nav-links.nav-right a {
+        color: #fff;
+      }
+
+      .nav-links.nav-right a::after {
+        display: none !important;
+      }
+
+      .burger-btn {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+        margin-left: 0.5rem;
+      }
+
+      .burger-bar {
+        width: 24px;
+        height: 3px;
+        background: #111;
+        margin: 3px 0;
+        border-radius: 2px;
+        transition: background 0.2s;
+      }
+
+      body[data-theme="dark"] .burger-bar {
+        background: #fff;
+      }
+
+      @media (max-width: 800px) {
+        .nav-links.nav-right {
+          gap: 0.7rem;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .burger-btn {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 80vw;
+          max-width: 340px;
+          height: 100vh;
+          background: #f8fafc;
+          box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+          border-top-left-radius: 18px;
+          border-bottom-left-radius: 18px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          transform: translateX(100vw);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 1000;
+        }
+
+        body[data-theme="dark"] .nav-menu {
+          background: #181818;
+        }
+
+        .nav-menu.open {
+          transform: translateX(0);
+        }
+
+        .nav-links.nav-right {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 2rem;
+          margin-top: 5rem;
+          width: 100%;
+        }
+
+        .nav-links.nav-right li {
+          width: 100%;
+          text-align: left;
+        }
+
+        .nav-links.nav-right a,
+        .nav-links.nav-right button {
+          width: 100%;
+          font-size: 1.2rem;
+          padding: 1.1rem 0 1.1rem 1.2rem;
+          border-radius: 8px;
+          box-shadow: none;
+          color: #111 !important;
+          background: none;
+          text-align: left;
+        }
+
+        body[data-theme="dark"] .nav-links.nav-right a,
+        body[data-theme="dark"] .nav-links.nav-right button {
+          color: #fff !important;
+        }
+      }
+
+      @media (min-width: 701px) {
+        .nav-menu {
+          position: static;
+          transform: none;
+          background: none;
+          height: auto;
+          width: auto;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+
+        .nav-links.nav-right {
+          flex-direction: row;
+          gap: 1.5rem;
+          margin-top: 0;
+        }
+      }
+
+      /* Footer styles */
+      .footer {
+        background: #fff;
+        box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.06);
+        padding: 2.5rem 0 1.5rem 0;
+        margin-top: 4rem;
+      }
+
+      .article-detail {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+      }
+
+      .article-header {
+        margin-bottom: 2rem;
+      }
+
+      .article-title {
+        font-size: 2.5rem;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .article-meta {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .article-image {
+        width: 100%;
+        max-height: 500px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+      }
+
+      .article-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-primary);
+      }
+
+      .article-content p {
+        margin-bottom: 1.5rem;
+      }
+
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid var(--light-bg);
+        border-radius: 50%;
+        border-top-color: var(--accent-color);
+        animation: spin 1s linear infinite;
+      }
+
+      .error-message {
+        text-align: center;
+        padding: 2rem;
+        color: #dc2626;
+        background: #fee2e2;
+        border-radius: 8px;
+        margin: 2rem auto;
+        max-width: 600px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .article-detail {
+          margin: 1rem;
+          padding: 1.5rem;
+        }
+
+        .article-title {
+          font-size: 2rem;
+        }
+
+        .article-meta {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <nav
+      class="navbar minimal-navbar"
+      style="background: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08)"
+    >
+      <div class="container nav-flex" style="justify-content: flex-end">
+        <div class="navbar-logo logo-left" style="margin-right: auto">
+          <span class="logo-icon" id="logoIcon"></span>
+          <span class="logo-text" style="color: #111">Football News</span>
+        </div>
+        <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+        <div
+          class="nav-menu"
+          id="navMenu"
+          style="background: #fff; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1)"
+        >
+          <ul
+            class="nav-links nav-right"
+            id="navLinks"
+            style="justify-content: flex-end"
+          >
+            <li><a href="index.html#news" style="color: #111">News</a></li>
+            <li>
+              <a href="index.html#histoire" style="color: #111">Histoire</a>
+            </li>
+            <li><a href="index.html#videos" style="color: #111">Vidéos</a></li>
+            <li>
+              <a
+                href="admin.html"
+                id="adminLink"
+                style="display: none; color: #111"
+                >Administration</a
+              >
+            </li>
+            <li>
+              <a href="#" id="logoutButton" style="display: none; color: #111"
+                >Déconnexion</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <a href="index.html" class="back-button">← Retour aux articles</a>
+      <div class="article-detail" id="articleDetail">
+        <!-- Le contenu de l'article sera injecté ici dynamiquement -->
+      </div>
+    </div>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="error-message" id="errorMessage">
+      <!-- Erreur message will be injected here -->
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", async function () {
+        const loadingOverlay = document.getElementById("loadingOverlay");
+        const articleDetail = document.getElementById("articleDetail");
+        const errorMessage = document.getElementById("errorMessage");
+
+        // Récupérer l'ID de l'article depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get("id");
+
+        if (!articleId) {
+          showError("ID de l'article non spécifié");
+          return;
+        }
+
+        try {
+          // Afficher le loading
+          loadingOverlay.style.display = "flex";
+          errorMessage.style.display = "none";
+
+          // Récupérer l'article depuis l'API
+          const response = await fetch(
+            `https://newsfootbackend-production.up.railway.app/api/articles/${articleId}`
+          );
+
+          if (!response.ok) {
+            throw new Error("Erreur lors du chargement de l'article");
+          }
+
+          const article = await response.json();
+
+          // Mettre à jour le titre de la page
+          document.title = `${article.titre} - Football News`;
+
+          // Afficher l'article
+          articleDetail.innerHTML = `
+            <article>
+              <header class="article-header">
+                <h1 class="article-title">${article.titre}</h1>
+                <div class="article-meta">
+                  <span>Par ${article.auteur_prenom} ${
+            article.auteur_nom
+          }</span>
+                  <span>•</span>
+                  <span>${new Date(article.date_creation).toLocaleDateString(
+                    "fr-FR",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}</span>
+                  <span>•</span>
+                  <span>${article.categorie}</span>
+                </div>
+              </header>
+              ${
+                article.image
+                  ? `
+                <img 
+                  src="https://newsfootbackend-production.up.railway.app/${
+                    article.image.startsWith("src/")
+                      ? article.image
+                      : "src/" + article.image
+                  }"
+                  alt="${article.titre}"
+                  class="article-image"
+                >
+              `
+                  : ""
+              }
+              <div class="article-content">
+                ${article.contenu
+                  .split("\n")
+                  .map((paragraph) => `<p>${paragraph}</p>`)
+                  .join("")}
+              </div>
+            </article>
+          `;
+        } catch (error) {
+          console.error("Erreur:", error);
+          showError("Une erreur est survenue lors du chargement de l'article");
+        } finally {
+          loadingOverlay.style.display = "none";
+        }
+      });
+
+      function showError(message) {
+        const errorMessage = document.getElementById("errorMessage");
+        errorMessage.textContent = message;
+        errorMessage.style.display = "block";
+        document.getElementById("loadingOverlay").style.display = "none";
+      }
+
+      // Gestion du menu burger
+      const burgerBtn = document.getElementById("burgerBtn");
+      const navMenu = document.getElementById("navMenu");
+      const navLinks = document.getElementById("navLinks");
+
+      if (burgerBtn && navMenu && navLinks) {
+        burgerBtn.addEventListener("click", () => {
+          navMenu.classList.toggle("open");
+          navLinks.classList.toggle("open");
+        });
+      }
+
+      // Gestion du bouton de déconnexion
+      const logoutButton = document.getElementById("logoutButton");
+      const token = localStorage.getItem("token");
+      if (logoutButton) {
+        if (token) {
+          logoutButton.style.display = "inline-block";
+          logoutButton.onclick = function (e) {
+            e.preventDefault();
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+          };
+        } else {
+          logoutButton.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
