@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>News Foot - Administration</title>
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Vérification de l'authentification
+      document.addEventListener("DOMContentLoaded", function () {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          // Si pas de token, rediriger vers la page de connexion
+          window.location.href = "login.html?redirect=admin.html";
+        }
+      });
+    </script>
     <style>
       :root {
         --accent-color: #3b82f6;
