@@ -5,6 +5,386 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>News Foot - Administration</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="a.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <style>
+      :root {
+        --primary-color: #2563eb;
+        --primary-hover: #1d4ed8;
+        --secondary-color: #64748b;
+        --success-color: #22c55e;
+        --danger-color: #ef4444;
+        --background-color: #f8fafc;
+        --card-background: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border-color: #e2e8f0;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --transition: all 0.2s ease-in-out;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-primary);
+        line-height: 1.5;
+      }
+
+      /* Navbar améliorée */
+      .navbar-vgeux {
+        width: 100%;
+        background: var(--card-background);
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+        height: 64px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+      }
+
+      .navbar-vgeux .nav-logo {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--primary-color);
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .navbar-vgeux .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar-vgeux .nav-links a {
+        color: var(--text-primary);
+        font-weight: 500;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 0.875rem;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem;
+      }
+
+      .navbar-vgeux .nav-links a:hover {
+        color: var(--primary-color);
+        background-color: rgba(37, 99, 235, 0.1);
+      }
+
+      /* Stats Cards améliorées */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem 2rem;
+        margin-top: 64px;
+      }
+
+      .stats-card {
+        background: var(--card-background);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+      }
+
+      .stats-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 12px -1px rgb(0 0 0 / 0.1);
+      }
+
+      .stats-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        background-color: rgba(37, 99, 235, 0.1);
+      }
+
+      .stats-card h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem 0;
+        color: var(--text-primary);
+      }
+
+      .stats-card p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* Tableaux améliorés */
+      .articles-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 1rem 0;
+        background: var(--card-background);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .articles-table th {
+        background-color: #f8fafc;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: var(--text-secondary);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .articles-table td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-primary);
+      }
+
+      .articles-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .articles-table tr:hover td {
+        background-color: #f8fafc;
+      }
+
+      /* Boutons améliorés */
+      .add-button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .add-button:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-1px);
+      }
+
+      .add-button i {
+        font-size: 1rem;
+      }
+
+      /* Modals améliorés */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        backdrop-filter: blur(4px);
+      }
+
+      .modal-content {
+        background-color: var(--card-background);
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 600px;
+        width: 90%;
+        position: relative;
+        box-shadow: var(--shadow-md);
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      /* Dashboard sections */
+      .dashboard-main {
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .admin-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+      }
+
+      section {
+        background: var(--card-background);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navbar-vgeux {
+          padding: 0 1rem;
+          height: auto;
+          flex-direction: column;
+          padding: 1rem;
+        }
+
+        .navbar-vgeux .nav-links {
+          flex-direction: column;
+          width: 100%;
+          gap: 0.5rem;
+          margin-top: 1rem;
+        }
+
+        .stats-row {
+          grid-template-columns: 1fr;
+          padding: 1rem;
+        }
+
+        .dashboard-main {
+          padding: 1rem;
+        }
+
+        .modal-content {
+          margin: 1rem;
+          padding: 1.5rem;
+        }
+      }
+
+      /* Loading overlay */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(4px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--border-color);
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-start;
+      }
+
+      .action-buttons button {
+        padding: 0.5rem;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+      }
+
+      .action-buttons .edit-button {
+        background-color: rgba(37, 99, 235, 0.1);
+        color: var(--primary-color);
+      }
+
+      .action-buttons .edit-button:hover {
+        background-color: rgba(37, 99, 235, 0.2);
+      }
+
+      .action-buttons .delete-button {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--danger-color);
+      }
+
+      .action-buttons .delete-button:hover {
+        background-color: rgba(239, 68, 68, 0.2);
+      }
+
+      .action-buttons button i {
+        font-size: 0.875rem;
+      }
+    </style>
     <script>
       // Vérification de l'authentification
       document.addEventListener("DOMContentLoaded", function () {
@@ -15,540 +395,42 @@
         }
       });
     </script>
-    <style>
-      :root {
-        --accent-color: #3b82f6;
-        --bg-dark: #000;
-        --bg-card: #181818;
-        --text-primary: #fff;
-        --text-secondary: #b0b0b0;
-        --border-color: #222;
-        --bg-light: #f8fafc;
-        --bg-card-light: #e5e7eb;
-        --text-primary-light: #1e293b;
-        --text-secondary-light: #334155;
-        --border-color-light: #cbd5e1;
-      }
-
-      body[data-theme="light"] {
-        --bg-dark: #f8fafc;
-        --bg-card: #fff;
-        --text-primary: #1e293b;
-        --text-secondary: #334155;
-        --border-color: #cbd5e1;
-      }
-
-      html,
-      body {
-        background: var(--bg-dark) !important;
-        color: var(--text-primary) !important;
-        min-height: 100vh;
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-
-      .navbar.minimal-navbar {
-        background: #fff;
-        border-bottom: 1px solid #e5e7eb;
-        box-shadow: none;
-        padding: 0.5rem 0;
-      }
-
-      body[data-theme="dark"] .navbar.minimal-navbar {
-        background: #111;
-        border-bottom: 1px solid #222;
-      }
-
-      .nav-flex {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logo-left {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .logo-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-      }
-
-      .logo-text {
-        font-size: 1.3rem;
-        font-weight: bold;
-        color: #111;
-        letter-spacing: 1px;
-      }
-
-      body[data-theme="dark"] .logo-text {
-        color: #fff;
-      }
-
-      .nav-links.nav-right {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .nav-links.nav-right a {
-        color: #111;
-        background: none;
-        font-size: 1.08rem;
-        font-weight: 500;
-        border: none;
-        border-radius: 0;
-        text-decoration: none !important;
-        padding: 0.5rem 0.7rem;
-        position: relative;
-        transition: none;
-        cursor: pointer;
-      }
-
-      body[data-theme="dark"] .nav-links.nav-right a {
-        color: #fff;
-      }
-
-      .nav-links.nav-right a::after {
-        display: none !important;
-      }
-
-      .burger-btn {
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1001;
-        margin-left: 0.5rem;
-      }
-
-      .burger-bar {
-        width: 24px;
-        height: 3px;
-        background: #111;
-        margin: 3px 0;
-        border-radius: 2px;
-        transition: background 0.2s;
-      }
-
-      body[data-theme="dark"] .burger-bar {
-        background: #fff;
-      }
-
-      @media (max-width: 800px) {
-        .nav-links.nav-right {
-          gap: 0.7rem;
-        }
-      }
-
-      @media (max-width: 700px) {
-        .burger-btn {
-          display: flex;
-        }
-
-        .nav-menu {
-          position: fixed;
-          top: 0;
-          right: 0;
-          width: 80vw;
-          max-width: 340px;
-          height: 100vh;
-          background: #f8fafc;
-          box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
-          border-top-left-radius: 18px;
-          border-bottom-left-radius: 18px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: flex-start;
-          transform: translateX(100vw);
-          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          z-index: 1000;
-        }
-
-        body[data-theme="dark"] .nav-menu {
-          background: #181818;
-        }
-
-        .nav-menu.open {
-          transform: translateX(0);
-        }
-
-        .nav-links.nav-right {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 2rem;
-          margin-top: 5rem;
-          width: 100%;
-        }
-
-        .nav-links.nav-right li {
-          width: 100%;
-          text-align: left;
-        }
-
-        .nav-links.nav-right a,
-        .nav-links.nav-right button {
-          width: 100%;
-          font-size: 1.2rem;
-          padding: 1.1rem 0 1.1rem 1.2rem;
-          border-radius: 8px;
-          box-shadow: none;
-          color: #111 !important;
-          background: none;
-          text-align: left;
-        }
-
-        body[data-theme="dark"] .nav-links.nav-right a,
-        body[data-theme="dark"] .nav-links.nav-right button {
-          color: #fff !important;
-        }
-      }
-
-      @media (min-width: 701px) {
-        .nav-menu {
-          position: static;
-          transform: none;
-          background: none;
-          height: auto;
-          width: auto;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-        }
-
-        .nav-links.nav-right {
-          flex-direction: row;
-          gap: 1.5rem;
-          margin-top: 0;
-        }
-      }
-
-      /* Footer styles */
-      .footer {
-        background: #fff;
-        box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.06);
-        padding: 2.5rem 0 1.5rem 0;
-        margin-top: 4rem;
-      }
-
-      /* Dashboard styles */
-      .dashboard-content {
-        background: #fff;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-        border-radius: 12px;
-        padding: 2rem;
-        margin: 2rem 0;
-      }
-
-      .admin-title {
-        color: var(--accent-color);
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .add-button {
-        background-color: var(--accent-color);
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: background-color 0.3s;
-        border: none;
-        cursor: pointer;
-      }
-
-      .add-button:hover {
-        background-color: #3182ce;
-      }
-
-      .articles-table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        margin-bottom: 2rem;
-      }
-
-      .articles-table th,
-      .articles-table td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid #e2e8f0;
-      }
-
-      .articles-table th {
-        background-color: var(--accent-color);
-        color: white;
-        font-weight: 600;
-        font-size: 1.05rem;
-      }
-
-      .articles-table tr:last-child td {
-        border-bottom: none;
-      }
-
-      .articles-table tr:hover {
-        background-color: #f1f5f9;
-      }
-
-      .action-buttons {
-        display: flex;
-        gap: 0.5rem;
-      }
-
-      .edit-button,
-      .delete-button {
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        border: none;
-        cursor: pointer;
-        font-weight: 500;
-        font-size: 0.98rem;
-        transition: background 0.2s, opacity 0.2s;
-      }
-
-      .edit-button {
-        background-color: var(--accent-color);
-        color: white;
-      }
-
-      .edit-button:hover {
-        background: #2563eb;
-      }
-
-      .delete-button {
-        background-color: #e53e3e;
-        color: white;
-      }
-
-      .delete-button:hover {
-        background: #b91c1c;
-      }
-
-      /* Modal styles */
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.4);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-content {
-        background: #fff;
-        border-radius: 10px;
-        padding: 2rem;
-        max-width: 500px;
-        width: 95vw;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-        position: relative;
-      }
-
-      .close-button {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: #64748b;
-      }
-
-      .form-group {
-        margin-bottom: 1.3rem;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-      }
-
-      .form-group input,
-      .form-group textarea,
-      .form-group select {
-        width: 100%;
-        padding: 0.7rem;
-        border: 1px solid #cbd5e1;
-        border-radius: 5px;
-        font-size: 1rem;
-        background: #f8fafc;
-      }
-
-      .form-group textarea {
-        min-height: 90px;
-        resize: vertical;
-      }
-
-      .modal-buttons {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        margin-top: 1.5rem;
-      }
-
-      .modal-buttons button {
-        padding: 0.7rem 1.3rem;
-        border-radius: 4px;
-        border: none;
-        cursor: pointer;
-        font-weight: 500;
-        font-size: 1rem;
-      }
-
-      .save-button {
-        background-color: var(--accent-color);
-        color: white;
-      }
-
-      .cancel-button {
-        background-color: #e2e8f0;
-        color: #1e293b;
-      }
-
-      .thumbnail-preview {
-        max-width: 180px;
-        max-height: 180px;
-        margin-top: 0.5rem;
-        border-radius: 4px;
-        display: block;
-      }
-
-      .loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(255, 255, 255, 0.7);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 2000;
-      }
-
-      .loading-spinner {
-        width: 50px;
-        height: 50px;
-        border: 3px solid #e5e7eb;
-        border-radius: 50%;
-        border-top-color: var(--accent-color);
-        animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      body.modal-open {
-        overflow: hidden;
-      }
-
-      @media (max-width: 900px) {
-        .dashboard-content {
-          padding: 1rem;
-        }
-        .articles-table th,
-        .articles-table td {
-          padding: 0.7rem;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .dashboard-content {
-          padding: 0.3rem;
-        }
-        .admin-title {
-          font-size: 1.1rem;
-        }
-        .add-button {
-          padding: 0.5rem 1rem;
-          font-size: 0.95rem;
-        }
-      }
-    </style>
   </head>
-  <body data-theme="light">
-    <nav
-      class="navbar minimal-navbar"
-      style="background: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08)"
-    >
-      <div class="container nav-flex" style="justify-content: flex-end">
-        <div class="navbar-logo logo-left" style="margin-right: auto">
-          <span class="logo-icon" id="logoIcon"></span>
-          <span class="logo-text" style="color: #111">Football News</span>
-        </div>
-        <button class="burger-btn" id="burgerBtn" aria-label="Menu">
-          <span class="burger-bar"></span>
-          <span class="burger-bar"></span>
-          <span class="burger-bar"></span>
-        </button>
-        <div
-          class="nav-menu"
-          id="navMenu"
-          style="background: #fff; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1)"
-        >
-          <ul
-            class="nav-links nav-right"
-            id="navLinks"
-            style="justify-content: flex-end"
-          >
-            <li><a href="index.html#news" style="color: #111">News</a></li>
-            <li>
-              <a href="index.html#histoire" style="color: #111">Histoire</a>
-            </li>
-            <li><a href="index.html#videos" style="color: #111">Vidéos</a></li>
-            <li>
-              <a
-                href="admin.html"
-                id="adminLink"
-                style="display: none; color: #111"
-                >Administration</a
-              >
-            </li>
-            <li>
-              <a href="#" id="logoutButton" style="display: none; color: #111"
-                >Déconnexion</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+  <body>
+    <nav class="navbar-vgeux">
+      <div class="nav-logo">News Foot</div>
+      <ul class="nav-links">
+        <li><a href="index.html">ACCUEIL</a></li>
+        <li><a href="index.html#articles">ARTICLES</a></li>
+        <li><a href="index.html#videos">VIDEOS</a></li>
+        <li><a href="#" id="logoutButton"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
+      </ul>
     </nav>
-
+    <div style="height:56px;"></div>
+    <div class="stats-row">
+      <div class="stats-card articles">
+        <div class="stats-icon"><i class="fas fa-newspaper"></i></div>
+        <h3 id="totalArticles">0</h3>
+        <p>Articles publiés</p>
+      </div>
+      <div class="stats-card videos">
+        <div class="stats-icon"><i class="fas fa-video"></i></div>
+        <h3 id="totalVideos">0</h3>
+        <p>Vidéos publiées</p>
+      </div>
+      <div class="stats-card authors">
+        <div class="stats-icon"><i class="fas fa-users"></i></div>
+        <h3 id="totalAuthors">0</h3>
+        <p>Auteurs actifs</p>
+      </div>
+      <div class="stats-card categories">
+        <div class="stats-icon"><i class="fas fa-tags"></i></div>
+        <h3 id="totalCategories">0</h3>
+        <p>Catégories</p>
+      </div>
+    </div>
+  </main>
+</div>
     <div class="dashboard-main">
       <main class="dashboard-content">
         <section id="articles-section">
@@ -779,8 +661,6 @@
             </form>
           </div>
         </div>
-      </main>
-    </div>
 
     <footer class="footer">
       <div
@@ -896,6 +776,90 @@
           }
         }
       });
+    </script>
+    <script>
+      async function updateDashboardStats() {
+        const token = localStorage.getItem("token");
+        const API_BASE_URL = "https://newsfootbackend-production.up.railway.app";
+
+        if (!token) {
+          console.error("Pas de token trouvé dans le localStorage");
+          return;
+        }
+
+        try {
+          console.log("Début de la récupération des statistiques...");
+          
+          // Test de la validité du token
+          const testResponse = await fetch(`${API_BASE_URL}/api/articles`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          
+          if (!testResponse.ok) {
+            throw new Error(`Erreur API: ${testResponse.status} ${testResponse.statusText}`);
+          }
+
+          const [articles, videos, authors, categories] = await Promise.all([
+            fetch(`${API_BASE_URL}/api/articles`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }).then(async (r) => {
+              if (!r.ok) throw new Error(`Erreur articles: ${r.status}`);
+              const data = await r.json();
+              console.log("Articles reçus:", data);
+              return data;
+            }),
+            fetch(`${API_BASE_URL}/api/videos`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }).then(async (r) => {
+              if (!r.ok) throw new Error(`Erreur videos: ${r.status}`);
+              const data = await r.json();
+              console.log("Videos reçues:", data);
+              return data;
+            }),
+            fetch(`${API_BASE_URL}/api/auteurs`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }).then(async (r) => {
+              if (!r.ok) throw new Error(`Erreur auteurs: ${r.status}`);
+              const data = await r.json();
+              console.log("Auteurs reçus pour affichage:", data);
+              return data;
+            }),
+            fetch(`${API_BASE_URL}/api/categories`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }).then(async (r) => {
+              if (!r.ok) throw new Error(`Erreur categories: ${r.status}`);
+              const data = await r.json();
+              console.log("Categories reçues:", data);
+              return data;
+            }),
+          ]);
+
+          console.log("Toutes les données reçues:", { articles, videos, authors, categories });
+
+          // Vérification que les données sont des tableaux
+          if (!Array.isArray(articles) || !Array.isArray(videos) || 
+              !Array.isArray(authors) || !Array.isArray(categories)) {
+            throw new Error("Les données reçues ne sont pas des tableaux");
+          }
+
+          document.getElementById("totalArticles").textContent = articles.length;
+          document.getElementById("totalVideos").textContent = videos.length;
+          document.getElementById("totalAuthors").textContent = authors.length;
+          document.getElementById("totalCategories").textContent = categories.length;
+
+          console.log("Statistiques mises à jour avec succès");
+        } catch (error) {
+          console.error("Erreur détaillée lors de la récupération des stats:", error);
+          document.getElementById("totalArticles").textContent = "Erreur";
+          document.getElementById("totalVideos").textContent = "Erreur";
+          document.getElementById("totalAuthors").textContent = "Erreur";
+          document.getElementById("totalCategories").textContent = "Erreur";
+        }
+      }
+      document.addEventListener("DOMContentLoaded", updateDashboardStats);
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', init);
     </script>
   </body>
 </html>

@@ -33,16 +33,27 @@ function displayAuthors() {
     const tbody = document.getElementById('authorsTableBody');
     if (!tbody) return;
 
-    tbody.innerHTML = authors.map(author => `
+    // Log pour debug
+    console.log('Auteurs reçus pour affichage:', authors);
+
+    tbody.innerHTML = authors.map(author => {
+        const prenom = author.prenom || author.auteur_prenom || '';
+        const nom = author.nom || author.auteur_nom || '';
+        return `
         <tr>
-            <td>${author.prenom || ''}</td>
-            <td>${author.nom || ''}</td>
+            <td>${prenom}</td>
+            <td>${nom}</td>
             <td class="action-buttons">
-                <button class="edit-button" onclick="editAuthor('${author.id_auteur}')">Modifier</button>
-                <button class="delete-button" onclick="deleteAuthor('${author.id_auteur}')">Supprimer</button>
+                <button class="edit-button" onclick="editAuthor('${author.id_auteur}')" title="Modifier">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                <button class="delete-button" onclick="deleteAuthor('${author.id_auteur}')" title="Supprimer">
+                    <i class="fas fa-trash"></i>
+                </button>
             </td>
         </tr>
-    `).join('');
+        `;
+    }).join('');
 }
 
 function updateAuthorSelects() {
@@ -321,24 +332,31 @@ const deleteArticle = async (id) => {
 
 // Fonctions d'affichage
 const displayArticles = (articles) => {
-    articlesTableBody.innerHTML = articles.map(article => `
+    articlesTableBody.innerHTML = articles.map(article => {
+        // Log de l'article pour debug
+        console.log('Article:', article);
+        
+        // Récupération des informations de l'auteur
+        const auteurPrenom = article.auteur_prenom || article.auteur?.prenom || '';
+        const auteurNom = article.auteur_nom || article.auteur?.nom || '';
+        const nomAuteur = auteurPrenom && auteurNom ? `${auteurPrenom} ${auteurNom}` : 'Auteur inconnu';
+        
+        return `
         <tr>
             <td>${article.titre}</td>
-            <td>${article.categorie}</td>
-            <td>${article.auteur_prenom} ${article.auteur_nom}</td>
+            <td>${article.categorie?.nom || article.categorie || 'Non catégorisé'}</td>
+            <td>${nomAuteur}</td>
             <td>${formatDate(article.date_creation)}</td>
-            <td>
-                <div class="action-buttons">
-                    <button class="edit-button" onclick="editArticle(${article.id_article})">
-                        Modifier
-                    </button>
-                    <button class="delete-button" onclick="confirmDelete(${article.id_article})">
-                        Supprimer
-                    </button>
-                </div>
+            <td class="action-buttons">
+                <button class="edit-button" onclick="editArticle(${article.id_article})">
+                    <i class="fa fa-pencil"></i>
+                </button>
+                <button class="delete-button" onclick="deleteArticle(${article.id_article})">
+                    <i class="fa fa-trash"></i>
+                </button>
             </td>
-        </tr>
-    `).join('');
+        </tr>`;
+    }).join('');
 };
 
 const populateSelects = async () => {
@@ -591,20 +609,30 @@ const deleteVideo = async (id) => {
 
 // --- Affichage des vidéos ---
 const displayVideos = (videos) => {
-    videosTableBody.innerHTML = videos.map(video => `
+    videosTableBody.innerHTML = videos.map(video => {
+        // Récupération des informations de l'auteur
+        const auteurPrenom = video.auteur_prenom || video.auteur?.prenom || '';
+        const auteurNom = video.auteur_nom || video.auteur?.nom || '';
+        const nomAuteur = (auteurPrenom || auteurNom) ? `${auteurPrenom} ${auteurNom}`.trim() : 'Auteur inconnu';
+        // Récupération de la catégorie
+        const categorieNom = video.categorie?.nom || video.categorie || 'Non catégorisé';
+        return `
         <tr>
             <td>${video.titre}</td>
-            <td>${video.categorie}</td>
-            <td>${video.auteur_prenom} ${video.auteur_nom}</td>
+            <td>${categorieNom}</td>
+            <td>${nomAuteur}</td>
             <td>${formatDate(video.date_creation)}</td>
-            <td>
-                <div class="action-buttons">
-                    <button class="edit-button" onclick="editVideo(${video.id_video})">Modifier</button>
-                    <button class="delete-button" onclick="confirmDeleteVideo(${video.id_video})">Supprimer</button>
-                </div>
+            <td class="action-buttons">
+                <button class="edit-button" onclick="editVideo(${video.id_video})">
+                    <i class="fa fa-pencil"></i>
+                </button>
+                <button class="delete-button" onclick="deleteVideo(${video.id_video})">
+                    <i class="fa fa-trash"></i>
+                </button>
             </td>
         </tr>
-    `).join('');
+        `;
+    }).join('');
 };
 
 // --- Charger les catégories et auteurs pour la vidéo ---
@@ -701,7 +729,8 @@ const init = async () => {
     await Promise.all([
         loadArticles(),
         populateSelects(),
-        initVideos()
+        initVideos(),
+        loadAuthors()
     ]);
     
     articleForm.addEventListener('submit', handleSubmit);
