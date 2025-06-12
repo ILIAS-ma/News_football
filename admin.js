@@ -351,7 +351,7 @@ const displayArticles = (articles) => {
                 <button class="edit-button" onclick="editArticle(${article.id_article})">
                     <i class="fa fa-pencil"></i>
                 </button>
-                <button class="delete-button" onclick="deleteArticle(${article.id_article})">
+                <button class="delete-button" onclick="confirmDelete(${article.id_article})">
                     <i class="fa fa-trash"></i>
                 </button>
             </td>
@@ -626,7 +626,7 @@ const displayVideos = (videos) => {
                 <button class="edit-button" onclick="editVideo(${video.id_video})">
                     <i class="fa fa-pencil"></i>
                 </button>
-                <button class="delete-button" onclick="deleteVideo(${video.id_video})">
+                <button class="delete-button" onclick="confirmDeleteVideo(${video.id_video})">
                     <i class="fa fa-trash"></i>
                 </button>
             </td>
