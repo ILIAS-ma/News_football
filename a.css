@@ -84,7 +84,7 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-
+  background-image: url('/logopfe.jpeg');
   background-color: #DFDFDF;
   
   text-align: center;
