@@ -299,31 +299,317 @@
       /* Responsive Design */
       @media (max-width: 768px) {
         .navbar-vgeux {
-          padding: 0 1rem;
+          padding: 0.5rem;
           height: auto;
           flex-direction: column;
-          padding: 1rem;
+          position: relative;
         }
 
         .navbar-vgeux .nav-links {
           flex-direction: column;
           width: 100%;
           gap: 0.5rem;
-          margin-top: 1rem;
+          margin-top: 0.5rem;
+          padding: 0.5rem 0;
+        }
+
+        .navbar-vgeux .nav-links a {
+          width: 100%;
+          text-align: center;
+          padding: 0.75rem;
+          border-radius: 0.375rem;
+          background-color: var(--background-color);
         }
 
         .stats-row {
           grid-template-columns: 1fr;
+          gap: 1rem;
           padding: 1rem;
+          margin-top: 0;
+        }
+
+        .stats-card {
+          padding: 1rem;
+        }
+
+        .stats-card h3 {
+          font-size: 1.5rem;
         }
 
         .dashboard-main {
+          padding: 0.75rem;
+        }
+
+        .admin-title {
+          font-size: 1.25rem;
+        }
+
+        section {
           padding: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        /* Amélioration des tableaux pour mobile */
+        .articles-table {
+          display: block;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          margin: 0 -1rem;
+          width: calc(100% + 2rem);
+        }
+
+        .articles-table th,
+        .articles-table td {
+          padding: 0.75rem;
+          white-space: nowrap;
+          min-width: 120px;
+        }
+
+        .articles-table th:first-child,
+        .articles-table td:first-child {
+          position: sticky;
+          left: 0;
+          background-color: var(--card-background);
+          z-index: 1;
+        }
+
+        /* Amélioration des boutons pour mobile */
+        .add-button {
+          width: 100%;
+          justify-content: center;
+          margin-top: 1rem;
+        }
+
+        .action-buttons {
+          flex-wrap: wrap;
+          gap: 0.25rem;
+        }
+
+        .action-buttons button {
+          width: 36px;
+          height: 36px;
+        }
+
+        /* Amélioration des modals pour mobile */
+        .modal-content {
+          margin: 0;
+          padding: 1rem;
+          width: 100%;
+          height: 100%;
+          max-width: none;
+          border-radius: 0;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .modal-content form {
+          flex: 1;
+          overflow-y: auto;
+          padding-bottom: 1rem;
+        }
+
+        .form-group {
+          margin-bottom: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+          font-size: 16px; /* Évite le zoom automatique sur iOS */
+          padding: 0.625rem;
+        }
+
+        .modal-buttons {
+          display: flex;
+          gap: 0.5rem;
+          margin-top: auto;
+          padding-top: 1rem;
+          border-top: 1px solid var(--border-color);
+        }
+
+        .modal-buttons button {
+          flex: 1;
+          padding: 0.75rem;
+        }
+
+        /* Amélioration du footer pour mobile */
+        .footer {
+          padding: 1rem;
+          text-align: center;
+        }
+
+        .footer .row {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .footer .row ul {
+          padding: 0;
+          margin: 0;
+        }
+
+        .footer .row ul li {
+          margin: 0.5rem 0;
+        }
+
+        /* Styles pour les tableaux sur mobile */
+        .articles-table-container {
+          position: relative;
+          margin: 0 -1rem;
+          padding: 0 1rem;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .articles-table {
+          min-width: 600px;
+          margin: 0;
+        }
+
+        .articles-table th,
+        .articles-table td {
+          position: relative;
+        }
+
+        .articles-table th:first-child,
+        .articles-table td:first-child {
+          position: sticky;
+          left: 0;
+          background-color: var(--card-background);
+          z-index: 2;
+          box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Amélioration des formulaires sur mobile */
+        .form-group label {
+          font-size: 0.875rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="url"],
+        .form-group select,
+        .form-group textarea {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid var(--border-color);
+          border-radius: 0.375rem;
+          font-size: 16px;
+          background-color: var(--card-background);
+          transition: border-color 0.2s ease;
+        }
+
+        .form-group input[type="file"] {
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px dashed var(--border-color);
+          border-radius: 0.375rem;
+          background-color: var(--background-color);
+        }
+
+        /* Amélioration des boutons sur mobile */
+        .modal-buttons {
+          position: sticky;
+          bottom: 0;
+          background-color: var(--card-background);
+          padding: 1rem;
+          margin: 0 -1rem;
+          border-top: 1px solid var(--border-color);
+          display: flex;
+          gap: 0.5rem;
+        }
+
+        .modal-buttons button {
+          flex: 1;
+          padding: 0.75rem;
+          font-size: 0.875rem;
+          font-weight: 500;
+          border-radius: 0.375rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .modal-buttons .save-button {
+          background-color: var(--primary-color);
+          color: white;
+          border: none;
+        }
+
+        .modal-buttons .cancel-button {
+          background-color: var(--background-color);
+          color: var(--text-primary);
+          border: 1px solid var(--border-color);
+        }
+
+        /* Amélioration des cartes statistiques sur mobile */
+        .stats-card {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .stats-card::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, rgba(37, 99, 235, 0.05), transparent);
+          pointer-events: none;
+        }
+
+        .stats-icon {
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Amélioration de la navigation sur mobile */
+        .navbar-vgeux .nav-links a {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .navbar-vgeux .nav-links a::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background-color: var(--primary-color);
+          transition: all 0.3s ease;
+          transform: translateX(-50%);
+        }
+
+        .navbar-vgeux .nav-links a:hover::after {
+          width: 100%;
+        }
+      }
+
+      /* Ajout de styles pour les très petits écrans */
+      @media (max-width: 480px) {
+        .stats-card {
+          padding: 0.75rem;
+        }
+
+        .stats-icon {
+          width: 40px;
+          height: 40px;
+          font-size: 1.25rem;
+        }
+
+        .stats-card h3 {
+          font-size: 1.25rem;
+        }
+
+        .articles-table th,
+        .articles-table td {
+          padding: 0.5rem;
+          font-size: 0.875rem;
         }
 
         .modal-content {
-          margin: 1rem;
-          padding: 1.5rem;
+          padding: 0.75rem;
         }
       }
 
@@ -397,6 +683,63 @@
       .action-buttons button i {
         font-size: 0.875rem;
       }
+
+      /* Nouveau style pour le footer */
+      .footer {
+        background: #111;
+        color: #e5e5e5;
+        padding: 2rem 1rem 1rem 1rem;
+        text-align: center;
+        width: 100%;
+        margin-top: 2rem;
+      }
+      .footer .footer-socials {
+        display: flex;
+        justify-content: center;
+        gap: 2.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 2.2rem;
+      }
+      .footer .footer-socials a {
+        color: #bdbdbd;
+        transition: color 0.2s;
+      }
+      .footer .footer-socials a:hover {
+        color: #2563eb;
+      }
+      .footer .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5rem;
+        margin-bottom: 1.2rem;
+        font-size: 1.2rem;
+      }
+      .footer .footer-links a {
+        color: #bdbdbd;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer .footer-links a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      .footer .footer-copy {
+        color: #bdbdbd;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+      @media (max-width: 600px) {
+        .footer .footer-links {
+          flex-direction: column;
+          gap: 1rem;
+          font-size: 1rem;
+        }
+        .footer .footer-socials {
+          font-size: 1.5rem;
+          gap: 1.2rem;
+        }
+      }
     </style>
     <script>
       // Vérification de l'authentification
@@ -459,20 +802,22 @@
               Ajouter un article
             </button>
           </div>
-          <table class="articles-table">
-            <thead>
-              <tr>
-                <th>Titre</th>
-                <th>Catégorie</th>
-                <th>Auteur</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="articlesTableBody">
-              <!-- Les articles seront chargés ici dynamiquement -->
-            </tbody>
-          </table>
+          <div class="articles-table-container">
+            <table class="articles-table">
+              <thead>
+                <tr>
+                  <th>Titre</th>
+                  <th>Catégorie</th>
+                  <th>Auteur</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="articlesTableBody">
+                <!-- Les articles seront chargés ici dynamiquement -->
+              </tbody>
+            </table>
+          </div>
         </section>
         <section id="videos-section">
           <div
@@ -487,20 +832,22 @@
               Ajouter une vidéo
             </button>
           </div>
-          <table class="articles-table">
-            <thead>
-              <tr>
-                <th>Titre</th>
-                <th>Catégorie</th>
-                <th>Auteur</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="videosTableBody">
-              <!-- Les vidéos seront chargées ici dynamiquement -->
-            </tbody>
-          </table>
+          <div class="articles-table-container">
+            <table class="articles-table">
+              <thead>
+                <tr>
+                  <th>Titre</th>
+                  <th>Catégorie</th>
+                  <th>Auteur</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="videosTableBody">
+                <!-- Les vidéos seront chargées ici dynamiquement -->
+              </tbody>
+            </table>
+          </div>
         </section>
         <div class="loading-overlay" id="loadingOverlay">
           <div class="loading-spinner"></div>
@@ -520,18 +867,20 @@
               Ajouter un auteur
             </button>
           </div>
-          <table class="articles-table">
-            <thead>
-              <tr>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="authorsTableBody">
-              <!-- Les auteurs seront chargés ici dynamiquement -->
-            </tbody>
-          </table>
+          <div class="articles-table-container">
+            <table class="articles-table">
+              <thead>
+                <tr>
+                  <th>Prénom</th>
+                  <th>Nom</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="authorsTableBody">
+                <!-- Les auteurs seront chargés ici dynamiquement -->
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <!-- Modal pour les articles -->
@@ -677,29 +1026,22 @@
 
         <footer>
           <div class="footer">
-            <div class="row">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-instagram"></i></a>
-              <a href="#"><i class="fa fa-youtube"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
+            <div class="footer-socials">
+              <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fa fa-youtube"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
             </div>
-    
-            <div class="row">
-              <ul>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Our Services</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Career</a></li>
-                <li>
-                  <a href="login.html">Se connecter en tant qu'admin</a>
-                </li>
-              </ul>
+            <div class="footer-links">
+              <a href="#">Contact us</a>
+              <a href="#">Our Services</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms & Conditions</a>
+              <a href="#">Career</a>
+              <a href="login.html">Se connecter en tant qu'admin</a>
             </div>
-    
-            <div class="row">
-              INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By:
-              Mahesh
+            <div class="footer-copy">
+              INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By: Mahesh
             </div>
           </div>
         </footer>
