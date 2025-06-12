@@ -120,7 +120,6 @@ const displayArticles = (articles) => {
                     src="${imageUrl}"
                     alt="${article.titre}"
                     class="article-image"
-                    loading="lazy"
                 >
                 <div class="article-content">
                     <h2 class="article-title">${article.titre}</h2>
