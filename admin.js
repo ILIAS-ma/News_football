@@ -20,7 +20,7 @@ let authors = [];
 
 async function loadAuthors() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/auteurs`);
+        const response = await fetch(`${window.API_BASE_URL}/api/auteurs`);
         authors = await response.json();
         displayAuthors();
         updateAuthorSelects();

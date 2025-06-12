@@ -1,0 +1,135 @@
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 100vh;
+    font-family: sans-serif;
+  }
+  
+  .login-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  
+  /* Colonne Formulaire */
+  .login-form-column {
+    margin-top: -110px;
+    flex: 1;
+    background-color: var(--bg-body, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  /* Colonne Image */
+  .login-image-column {
+    flex: 1;
+    background: url('./image/logo\ pfe.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+  }
+  
+  
+  .login-image-column .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .login-image-column .overlay h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .login-image-column .overlay p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  /* Adaptation mobile */
+  @media (max-width: 768px) {
+    .login-wrapper {
+      flex-direction: column;
+    }
+  
+    .login-image-column {
+      display: none;
+    }
+  }
+  @media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+    /* Supprime le shadow pour un look plus léger sur mobile si désiré, ou ajuste-le */
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0; /* Prend toute la largeur sur mobile */
+  }
+
+  .login-form-column {
+    padding: 1rem; /* Encore plus petit sur les très petits écrans */
+  }
+
+  .login-image-column {
+    /* Cache la colonne image sur les écrans plus petits (smartphones) */
+    display: none;
+  }
+}
+
+/* Adaptation pour les tablettes (min-width: 769px et max-width: 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .login-wrapper {
+    /* Laisser la direction flex par défaut (row) */
+    max-width: 900px; /* Un peu moins large sur tablette */
+    margin: 0 2rem; /* Garder un peu d'espace sur les côtés */
+  }
+
+  .login-form-column {
+    padding: 2rem; /* Remet le padding à une taille normale pour tablette */
+  }
+
+  .login-image-column {
+    /* Garder la colonne image visible, mais ajuster son flex */
+    flex: 0.8; /* La colonne image prendra un peu moins de place que le formulaire */
+  }
+
+  .login-image-column .overlay {
+    padding: 2.5rem; /* Ajuster le padding de l'overlay */
+  }
+
+  .login-image-column .overlay h2 {
+    font-size: 1.9rem;
+  }
+
+  .login-image-column .overlay p {
+    font-size: 1.05rem;
+  }
+}
+
+/* Adaptation pour les grands écrans (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .login-form-column {
+    padding: 3rem; /* Padding plus généreux pour les grands écrans */
+  }
+
+  .login-image-column .overlay {
+    padding: 3rem; /* Padding généreux pour l'overlay */
+  }
+
+  .login-image-column .overlay h2 {
+    font-size: 2rem;
+  }
+
+  .login-image-column .overlay p {
+    font-size: 1.1rem;
+  }
+}

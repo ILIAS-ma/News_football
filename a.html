@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="a.css" />
+    <!-- Font Awesome Icons -->
+    <link
+      href="https://opensource.keycdn.com/fontawesome/4.5.0/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom JavaScript -->
+    <script src="./a.js"></script>
+  </head>
+
+  <body id="page-top">
+    <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand page-scroll" href="#page-top">News Foot</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a class="page-scroll" href="a.html">ACCUEIL</a>
+            </li>
+            <li>
+              <a class="page-scroll" href="#articles">ARTICLES</a>
+            </li>
+            <li>
+              <a class="page-scroll" href="#videos">VIDEOS</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                id="logoutButton"
+                class="logout-button"
+                style="display: none"
+              >
+                <i class="fa fa-sign-out"></i> Déconnexion
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header>
+      <div class="header-content">
+        <div class="header-content-inner">
+          <h1>News Foot - Toute l'actualité du football</h1>
+          <hr />
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2
+        style="
+          font-family: var(--font-heading);
+          font-size: 2.5rem;
+          font-weight: 700;
+          text-align: center;
+          color: #333;
+          margin-bottom: 10px;
+        "
+      >
+        Derniers Articles
+      </h2>
+      <section id="articles" class="articles-grid">
+        <!-- Les articles seront chargés ici dynamiquement -->
+      </section>
+
+      <section id="histoire" class="histoire-section">
+        <h2>Histoire du Football</h2>
+        <div class="histoire-content">
+          <div class="histoire-card">
+            <h3>Les Origines</h3>
+            <p>
+              Le football moderne trouve ses racines dans l'Angleterre du XIXe
+              siècle, mais ses origines remontent à des jeux de balle pratiqués
+              depuis l'Antiquité. En 1863, la Football Association (FA) est
+              créée à Londres, établissant les premières règles officielles du
+              jeu.
+            </p>
+          </div>
+          <div class="histoire-card">
+            <h3>L'Évolution</h3>
+            <p>
+              De simple divertissement, le football est devenu le sport le plus
+              populaire au monde. La création de la FIFA en 1904 et
+              l'organisation de la première Coupe du Monde en 1930 ont contribué
+              à son développement international.
+            </p>
+          </div>
+          <div class="histoire-card">
+            <h3>Le Football Aujourd'hui</h3>
+            <p>
+              Le football moderne est marqué par une professionnalisation
+              accrue, des transferts records et une médiatisation sans
+              précédent. Il continue d'évoluer avec l'introduction de nouvelles
+              technologies comme la VAR.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <h2
+        style="
+          font-family: var(--font-heading);
+          font-size: 2.5rem;
+          font-weight: 700;
+          text-align: center;
+          color: #333;
+          margin: 40px 0 10px;
+        "
+      >
+        Dernières Vidéos
+      </h2>
+      <section id="videos" class="videos-grid">
+        <!-- Les vidéos seront chargées ici dynamiquement -->
+      </section>
+    </main>
+    <footer>
+      <div class="footer">
+        <div class="row">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-youtube"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+        </div>
+
+        <div class="row">
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Career</a></li>
+            <li>
+              <a href="login.html">Se connecter en tant qu'admin</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row">
+          INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By:
+          Mahesh
+        </div>
+      </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const logoutButton = document.getElementById("logoutButton");
+        if (logoutButton) logoutButton.style.display = "none";
+      });
+    </script>
+    <script>
+      // Gestion du bouton admin
+      const adminLoginBtn = document.getElementById("adminLoginBtn");
+      const token = localStorage.getItem("token");
+
+      if (adminLoginBtn) {
+        if (token) {
+          adminLoginBtn.href = "admin.html";
+          adminLoginBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Dashboard Admin
+          `;
+        }
+      }
+    </script>
+    <script>
+      // Gestion de la déconnexion
+      document.addEventListener("DOMContentLoaded", function () {
+        const logoutButton = document.getElementById("logoutButton");
+        const token = localStorage.getItem("token");
+
+        if (token) {
+          logoutButton.style.display = "block";
+          logoutButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (confirm("Êtes-vous sûr de vouloir vous déconnecter ?")) {
+              localStorage.removeItem("token");
+              window.location.href = "login.html";
+            }
+          });
+        }
+      });
+    </script>
+    <script src="./admin.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+      // Pour les catégories
+      fetch("categories.json")
+        .then((response) => response.json())
+        .then((categories) => {
+          const select = document.getElementById("categorieSelect");
+          categories.forEach((cat) => {
+            const option = document.createElement("option");
+            option.value = cat.id;
+            option.textContent = cat.nom;
+            select.appendChild(option);
+          });
+        });
+
+      // Pour les auteurs
+      fetch("https://newsfootbackend-production.up.railway.app/auteurs")
+        .then((r) => r.json())
+        .then(console.log);
+    </script>
+    <script>
+      // Remplir dynamiquement les catégories et auteurs dans les formulaires
+      function populateCategoriesAndAuthors() {
+        // Pour les articles
+        fetch("https://newsfootbackend-production.up.railway.app/categories")
+          .then((response) => response.json())
+          .then((categories) => {
+            const selects = [
+              document.getElementById("category"),
+              document.getElementById("videoCategory"),
+            ];
+            selects.forEach((select) => {
+              if (select) {
+                select.innerHTML = "";
+                categories.forEach((cat) => {
+                  const option = document.createElement("option");
+                  option.value = cat._id || cat.id;
+                  option.textContent = cat.nom || cat.name;
+                  select.appendChild(option);
+                });
+              }
+            });
+          });
+
+        fetch("https://newsfootbackend-production.up.railway.app/auteurs")
+          .then((response) => response.json())
+          .then((auteurs) => {
+            const selects = [
+              document.getElementById("author"),
+              document.getElementById("videoAuthor"),
+            ];
+            selects.forEach((select) => {
+              if (select) {
+                select.innerHTML = "";
+                auteurs.forEach((auteur) => {
+                  const option = document.createElement("option");
+                  option.value = auteur._id || auteur.id;
+                  option.textContent =
+                    (auteur.prenom ? auteur.prenom + " " : "") +
+                    (auteur.nom || auteur.name || "");
+                  select.appendChild(option);
+                });
+              }
+            });
+          });
+      }
+
+      // Appelle la fonction à l'ouverture des modals
+      function openModal() {
+        document.getElementById("articleModal").style.display = "flex";
+        populateCategoriesAndAuthors();
+      }
+      function openVideoModal() {
+        document.getElementById("videoModal").style.display = "flex";
+        populateCategoriesAndAuthors();
+      }
+    </script>
+
+    <!-- Modal Article CRUD -->
+    <div id="articleModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeModal('articleModal')"
+          >&times;</span
+        >
+        <h2 id="modalTitleArticle">Ajouter / Modifier un article</h2>
+        <form id="articleForm">
+          <input type="hidden" id="articleId" />
+          <div class="form-group">
+            <label for="title">Titre</label>
+            <input type="text" id="title" required />
+          </div>
+          <div class="form-group">
+            <label for="category">Catégorie</label>
+            <select id="category" required></select>
+          </div>
+          <div class="form-group">
+            <label for="author">Auteur</label>
+            <select id="author" required></select>
+          </div>
+          <div class="form-group">
+            <label for="content">Contenu</label>
+            <textarea id="content" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" id="image" accept="image/*" />
+            <img
+              id="imagePreview"
+              class="thumbnail-preview"
+              style="display: none"
+            />
+          </div>
+          <div class="modal-buttons">
+            <button
+              type="button"
+              class="cancel-button"
+              onclick="closeModal('articleModal')"
+            >
+              Annuler
+            </button>
+            <button type="submit" class="save-button">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Vidéo CRUD -->
+    <div id="videoModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeModal('videoModal')"
+          >&times;</span
+        >
+        <h2 id="modalTitleVideo">Ajouter / Modifier une vidéo</h2>
+        <form id="videoForm">
+          <input type="hidden" id="videoId" />
+          <div class="form-group">
+            <label for="videoTitle">Titre</label>
+            <input type="text" id="videoTitle" required />
+          </div>
+          <div class="form-group">
+            <label for="videoCategory">Catégorie</label>
+            <select id="videoCategory" required></select>
+          </div>
+          <div class="form-group">
+            <label for="videoAuthor">Auteur</label>
+            <select id="videoAuthor" required></select>
+          </div>
+          <div class="form-group">
+            <label for="videoUrl">URL YouTube</label>
+            <input type="url" id="videoUrl" required />
+          </div>
+          <div class="form-group">
+            <label for="videoDescription">Description</label>
+            <textarea id="videoDescription" required></textarea>
+          </div>
+          <div class="modal-buttons">
+            <button
+              type="button"
+              class="cancel-button"
+              onclick="closeModal('videoModal')"
+            >
+              Annuler
+            </button>
+            <button type="submit" class="save-button">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Auteur CRUD -->
+    <div id="authorModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeModal('authorModal')"
+          >&times;</span
+        >
+        <h2 id="modalTitleAuthor">Ajouter / Modifier un auteur</h2>
+        <form id="authorForm">
+          <input type="hidden" id="authorId" />
+          <div class="form-group">
+            <label for="authorPrenom">Prénom</label>
+            <input type="text" id="authorPrenom" required />
+          </div>
+          <div class="form-group">
+            <label for="authorNom">Nom</label>
+            <input type="text" id="authorNom" required />
+          </div>
+          <div class="modal-buttons">
+            <button
+              type="button"
+              class="cancel-button"
+              onclick="closeModal('authorModal')"
+            >
+              Annuler
+            </button>
+            <button type="submit" class="save-button">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <style>
+      html {
+        font-size: 16px;
+      }
+      body,
+      p,
+      li,
+      a,
+      span,
+      label,
+      input,
+      select,
+      textarea,
+      button {
+        font-size: 1rem !important;
+      }
+      h1 {
+        font-size: 2.5rem !important;
+      }
+      h2 {
+        font-size: 2rem !important;
+      }
+      h3 {
+        font-size: 1.4rem !important;
+      }
+      .navbar-nav > li > a,
+      .navbar-brand {
+        font-size: 1.1rem !important;
+      }
+      .article-title {
+        font-size: 1.4rem !important;
+      }
+      .article-excerpt {
+        font-size: 1.08rem !important;
+      }
+      .article-meta,
+      .article-author,
+      .read-more {
+        font-size: 1rem !important;
+      }
+      .footer,
+      .footer a,
+      .footer ul li a {
+        font-size: 1.05rem !important;
+      }
+      .form-group select,
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        font-size: 1.1rem;
+        border: 1.5px solid #b0b0b0;
+        border-radius: 7px;
+        background: #f8fafc;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        transition: border-color 0.2s;
+      }
+      .form-group select:focus,
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: #3b82f6;
+        outline: none;
+        background: #fff;
+      }
+      .thumbnail-preview {
+        max-width: 180px;
+        max-height: 180px;
+        margin-top: 0.5rem;
+        border-radius: 4px;
+        display: block;
+      }
+      .article-detail {
+        max-width: 800px;
+        margin: 2rem auto;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        padding: 2rem 2.5rem;
+      }
+      .article-image {
+        width: 100%;
+        max-height: 350px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        display: block;
+      }
+      .article-title {
+        font-size: 2.3rem;
+        font-weight: 700;
+        color: #1a237e;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+        font-family: "Montserrat", Arial, sans-serif;
+      }
+      .article-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #555;
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .article-author {
+        font-weight: 600;
+        color: #2563eb;
+      }
+      .article-content {
+        font-size: 1.13rem;
+        line-height: 1.8;
+        color: #222;
+      }
+      .article-content p {
+        margin-bottom: 1.3rem;
+      }
+      @media (max-width: 600px) {
+        .article-detail {
+          padding: 1rem;
+        }
+        .article-title {
+          font-size: 1.3rem;
+        }
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Foot - Administration</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="a.css" />
+  <!-- Font Awesome Icons -->
+  <link
+    href="https://opensource.keycdn.com/fontawesome/4.5.0/font-awesome.min.css"
+    rel="stylesheet"
+  />
+  <!-- Custom JavaScript -->
+  <script src="./a.js"></script>
+</head>
+
+<body id="page-top">
+  <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button
+          type="button"
+          class="navbar-toggle collapsed"
+          data-toggle="collapse"
+          data-target=".navbar-collapse"
+        >
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top">News Foot</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="page-scroll" href="a.html">ACCUEIL</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="a.html#articles">ARTICLES</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="a.html#videos">VIDEOS</a>
+          </li>
+          <li>
+            <a href="#" id="logoutButton" class="logout-button" style="display: none;">
+              <i class="fa fa-sign-out"></i> Déconnexion
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <script>
+      // Vérification de l'authentification
+      document.addEventListener("DOMContentLoaded", function () {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          // Si pas de token, rediriger vers la page de connexion
+          window.location.href = "login.html?redirect=admin.html";
+        }
+      });
+    </script>
+    <style>
+      :root {
+        --accent-color: #3b82f6;
+        --accent-hover: #2563eb;
+        --bg-dark: #000;
+        --bg-card: #181818;
+        --text-primary: #fff;
+        --text-secondary: #b0b0b0;
+        --border-color: #222;
+        --bg-light: #f8fafc;
+        --bg-card-light: #e5e7eb;
+        --text-primary-light: #1e293b;
+        --text-secondary-light: #334155;
+        --border-color-light: #cbd5e1;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --danger-color: #ef4444;
+      }
+
+      /* Dashboard Layout */
+      .dashboard-main {
+        padding: 80px 20px 20px;
+        background: #f1f5f9;
+        min-height: 100vh;
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .stat-icon.articles { background: var(--accent-color); }
+      .stat-icon.videos { background: var(--success-color); }
+      .stat-icon.authors { background: var(--warning-color); }
+
+      .stat-info h3 {
+        font-size: 1.8rem;
+        margin: 0;
+        color: var(--text-primary-light);
+      }
+
+      .stat-info p {
+        margin: 0;
+        color: var(--text-secondary-light);
+        font-size: 0.9rem;
+      }
+
+      /* Search and Filter Section */
+      .search-filter-section {
+        background: white;
+        padding: 1rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .search-box {
+        flex: 1;
+        min-width: 250px;
+        position: relative;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        border: 1px solid var(--border-color-light);
+        border-radius: 8px;
+        font-size: 0.95rem;
+      }
+
+      .search-box i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary-light);
+      }
+
+      .filter-group {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-button {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border-color-light);
+        border-radius: 6px;
+        background: white;
+        color: var(--text-secondary-light);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .filter-button:hover,
+      .filter-button.active {
+        background: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+      }
+
+      /* Table Improvements */
+      .dashboard-content {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .articles-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-top: 1rem;
+      }
+
+      .articles-table th {
+        background: #f8fafc;
+        color: var(--text-secondary-light);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        padding: 1rem;
+        text-align: left;
+      }
+
+      .articles-table td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color-light);
+        color: var(--text-primary-light);
+      }
+
+      .articles-table tr:hover {
+        background: #f8fafc;
+      }
+
+      .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      .status-badge.published {
+        background: #dcfce7;
+        color: var(--success-color);
+      }
+
+      .status-badge.draft {
+        background: #fef3c7;
+        color: var(--warning-color);
+      }
+
+      /* Action Buttons */
+      .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .action-button {
+        padding: 0.5rem;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: white;
+      }
+
+      .edit-button {
+        background: var(--accent-color);
+      }
+
+      .edit-button:hover {
+        background: var(--accent-hover);
+      }
+
+      .delete-button {
+        background: var(--danger-color);
+      }
+
+      .delete-button:hover {
+        background: #dc2626;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .search-filter-section {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .search-box {
+          width: 100%;
+        }
+
+        .filter-group {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .articles-table {
+          display: block;
+          overflow-x: auto;
+        }
+
+        .logout-button {
+          padding: 10px 15px;
+          display: block;
+          text-align: center;
+        }
+      }
+
+      .logout-button {
+        color: #ffffff !important;
+        font-weight: 500;
+        background-color: #000000;
+        padding: 8px 15px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+
+
+      .logout-button i {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+  
+
+    <div class="dashboard-main">
+      <!-- Stats Overview -->
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <div class="stat-icon articles">
+            <i class="fa fa-newspaper-o"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalArticles">0</h3>
+            <p>Articles publiés</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon videos">
+            <i class="fa fa-video-camera"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalVideos">0</h3>
+            <p>Vidéos publiées</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon authors">
+            <i class="fa fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="totalAuthors">0</h3>
+            <p>Auteurs actifs</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Articles Section -->
+      <section id="articles-section" class="dashboard-content">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 class="admin-title">Gestion des Articles</h2>
+          <button class="add-button" onclick="openModal()">
+            <i class="fa fa-plus"></i> Nouvel Article
+          </button>
+        </div>
+
+        <div class="search-filter-section">
+          <div class="search-box">
+            <i class="fa fa-search"></i>
+            <input type="text" id="articleSearch" placeholder="Rechercher un article..." onkeyup="filterArticles()">
+          </div>
+          <div class="filter-group">
+            <button class="filter-button active" data-filter="all">Tous</button>
+            <button class="filter-button" data-filter="published">Publiés</button>
+            <button class="filter-button" data-filter="draft">Brouillons</button>
+            <select class="filter-button" id="categoryFilter" onchange="filterArticles()">
+              <option value="">Toutes les catégories</option>
+            </select>
+          </div>
+        </div>
+
+        <table class="articles-table">
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Catégorie</th>
+              <th>Auteur</th>
+              <th>Date</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="articlesTableBody">
+            <!-- Les articles seront chargés ici dynamiquement -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Videos Section -->
+      <section id="videos-section" class="dashboard-content">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 class="admin-title">Gestion des Vidéos</h2>
+          <button class="add-button" onclick="openVideoModal()">
+            <i class="fa fa-plus"></i> Nouvelle Vidéo
+          </button>
+        </div>
+
+        <div class="search-filter-section">
+          <div class="search-box">
+            <i class="fa fa-search"></i>
+            <input type="text" id="videoSearch" placeholder="Rechercher une vidéo..." onkeyup="filterVideos()">
+          </div>
+          <div class="filter-group">
+            <button class="filter-button active" data-filter="all">Toutes</button>
+            <button class="filter-button" data-filter="published">Publiées</button>
+            <button class="filter-button" data-filter="draft">Brouillons</button>
+            <select class="filter-button" id="videoCategoryFilter" onchange="filterVideos()">
+              <option value="">Toutes les catégories</option>
+            </select>
+          </div>
+        </div>
+
+        <table class="articles-table">
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Catégorie</th>
+              <th>Auteur</th>
+              <th>Date</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="videosTableBody">
+            <!-- Les vidéos seront chargées ici dynamiquement -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Authors Section -->
+      <section id="authors-section" class="dashboard-content">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 class="admin-title">Gestion des Auteurs</h2>
+          <button class="add-button" onclick="openAuthorModal()">
+            <i class="fa fa-plus"></i> Nouvel Auteur
+          </button>
+        </div>
+
+        <div class="search-filter-section">
+          <div class="search-box">
+            <i class="fa fa-search"></i>
+            <input type="text" id="authorSearch" placeholder="Rechercher un auteur..." onkeyup="filterAuthors()">
+          </div>
+        </div>
+
+        <table class="articles-table">
+          <thead>
+            <tr>
+              <th>Prénom</th>
+              <th>Nom</th>
+              <th>Articles</th>
+              <th>Vidéos</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="authorsTableBody">
+            <!-- Les auteurs seront chargés ici dynamiquement -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Modal pour les articles -->
+      <div id="articleModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeModal()">&times;</span>
+          <h2 id="modalTitle">Ajouter un article</h2>
+          <form id="articleForm">
+            <input type="hidden" id="articleId" />
+            <div class="form-group">
+              <label for="title">Titre</label>
+              <input type="text" id="title" required />
+            </div>
+            <div class="form-group">
+              <label for="category">Catégorie</label>
+              <select id="category" required>
+                <!-- Les catégories seront chargées dynamiquement -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="author">Auteur</label>
+              <select id="author" required>
+                <!-- Les auteurs seront chargés dynamiquement -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="content">Contenu</label>
+              <textarea id="content" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="image">Image</label>
+              <input type="file" id="image" accept="image/*" />
+              <img
+                id="imagePreview"
+                class="thumbnail-preview"
+                style="display: none"
+              />
+            </div>
+            <div class="modal-buttons">
+              <button
+                type="button"
+                class="cancel-button"
+                onclick="closeModal()"
+              >
+                Annuler
+              </button>
+              <button type="submit" class="save-button">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal pour les vidéos -->
+      <div id="videoModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeVideoModal()"
+            >&times;</span
+          >
+          <h2 id="videoModalTitle">Ajouter une vidéo</h2>
+          <form id="videoForm">
+            <input type="hidden" id="videoId" />
+            <div class="form-group">
+              <label for="videoTitle">Titre</label>
+              <input type="text" id="videoTitle" required />
+            </div>
+            <div class="form-group">
+              <label for="videoCategory">Catégorie</label>
+              <select id="videoCategory" required>
+                <!-- Les catégories seront chargées dynamiquement -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="videoAuthor">Auteur</label>
+              <select id="videoAuthor" required>
+                <!-- Les auteurs seront chargés dynamiquement -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="videoUrl">URL YouTube</label>
+              <input
+                type="url"
+                id="videoUrl"
+                placeholder="https://www.youtube.com/watch?v=..."
+                required
+              />
+              <div id="videoPreview" style="margin-top: 1rem; display: none">
+                <iframe
+                  width="100%"
+                  height="200"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="videoDescription">Description</label>
+              <textarea id="videoDescription" required></textarea>
+            </div>
+            <div class="modal-buttons">
+              <button
+                type="button"
+                class="cancel-button"
+                onclick="closeVideoModal()"
+              >
+                Annuler
+              </button>
+              <button type="submit" class="save-button">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal pour les auteurs -->
+      <div id="authorModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeAuthorModal()"
+            >&times;</span
+          >
+          <h2 id="authorModalTitle">Ajouter un auteur</h2>
+          <form id="authorForm">
+            <input type="hidden" id="authorId" />
+            <div class="form-group">
+              <label for="authorPrenom">Prénom</label>
+              <input type="text" id="authorPrenom" required />
+            </div>
+            <div class="form-group">
+              <label for="authorNom">Nom</label>
+              <input type="text" id="authorNom" required />
+            </div>
+            <div class="modal-buttons">
+              <button
+                type="button"
+                class="cancel-button"
+                onclick="closeAuthorModal()"
+              >
+                Annuler
+              </button>
+              <button type="submit" class="save-button">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer">
+        <div class="row">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-youtube"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+        </div>
+
+        <div class="row">
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Career</a></li>
+            <li>
+              <a href="l.html" id="adminLoginBtn"
+                >Se connecter en tant qu'admin</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="row">
+          INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By:
+          Mahesh
+        </div>
+      </div>
+    </footer>
+
+    <script src="admin.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const burgerBtn = document.getElementById("burgerBtn");
+        const navMenu = document.getElementById("navMenu");
+        const navLinks = document.getElementById("navLinks");
+
+        if (burgerBtn && navMenu && navLinks) {
+          burgerBtn.addEventListener("click", () => {
+            navMenu.classList.toggle("open");
+            navLinks.classList.toggle("open");
+          });
+        }
+
+        const logoutButton = document.getElementById("logoutButton");
+        const token = localStorage.getItem("token");
+        if (logoutButton) {
+          if (token) {
+            logoutButton.style.display = "block";
+            logoutButton.onclick = function (e) {
+              e.preventDefault();
+              if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+              }
+            };
+          } else {
+            logoutButton.style.display = "none";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

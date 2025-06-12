@@ -102,17 +102,26 @@ const displayArticles = (articles) => {
         return;
     }
 
-    articlesContainer.innerHTML = articles.map(article => `
+    articlesContainer.innerHTML = articles.map(article => {
+        let imageUrl = '';
+        if (article.image) {
+            if (article.image.startsWith('http')) {
+                imageUrl = article.image;
+            } else {
+                imageUrl = `https://newsfootbackend-production.up.railway.app/${article.image.startsWith('src/') ? article.image : 'src/' + article.image}`;
+            }
+        } else {
+            imageUrl = 'https://via.placeholder.com/400x200?text=No+Image'; // image par défaut
+        }
+        return `
         <article class="article-card">
             <a href="article-detail.html?id=${article.id_article}" style="text-decoration: none; color: inherit;">
-                ${article.image ? `
-                    <img 
-                        src="https://newsfootbackend-production.up.railway.app/${article.image.startsWith('src/') ? article.image : 'src/' + article.image}"
-                        alt="${article.titre}"
-                        class="article-image"
-                        loading="lazy"
-                    >
-                ` : ''}
+                <img 
+                    src="${imageUrl}"
+                    alt="${article.titre}"
+                    class="article-image"
+                    loading="lazy"
+                >
                 <div class="article-content">
                     <h2 class="article-title">${article.titre}</h2>
                     <div class="article-meta">
@@ -123,7 +132,25 @@ const displayArticles = (articles) => {
                 </div>
             </a>
         </article>
-    `).join('');
+        `;
+    }).join('');
+};
+
+// Fonction utilitaire pour obtenir une miniature YouTube robuste
+const getYouTubeThumbnail = (videoId) => {
+    // Liste des formats de miniatures à essayer
+    const formats = [
+        `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+        `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+        `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+        `https://i.ytimg.com/vi/${videoId}/default.jpg`
+    ];
+    
+    // Retourner un objet avec les URLs et une image de secours
+    return {
+        urls: formats,
+        fallback: 'https://via.placeholder.com/480x360?text=Video+Thumbnail'
+    };
 };
 
 const displayVideos = (videos) => {
@@ -134,14 +161,20 @@ const displayVideos = (videos) => {
         return;
     }
 
-    videosContainer.innerHTML = videos.map(video => `
+    videosContainer.innerHTML = videos.map(video => {
+        const videoId = getYouTubeId(video.url_youtube);
+        const thumbnails = getYouTubeThumbnail(videoId);
+        
+        return `
         <a href="video-detail.html?id=${video.id_video}" style="text-decoration:none;color:inherit;">
           <div class="video-card">
             <div class="video-thumbnail">
               <img 
-                src="https://img.youtube.com/vi/${getYouTubeId(video.url_youtube)}/maxresdefault.jpg"
+                src="${thumbnails.urls[0]}"
+                srcset="${thumbnails.urls.map((url, i) => `${url} ${i + 1}x`).join(', ')}"
                 alt="${video.titre}"
                 loading="lazy"
+                onerror="this.onerror=null; this.src='${thumbnails.fallback}';"
               >
             </div>
             <div class="video-content">
@@ -152,7 +185,7 @@ const displayVideos = (videos) => {
             </div>
           </div>
         </a>
-    `).join('');
+    `}).join('');
 };
 
 // Fonction utilitaire pour extraire l'ID YouTube

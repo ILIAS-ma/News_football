@@ -5,22 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>News Foot - Administration</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="a.css" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
-  <link
-  href="https://opensource.keycdn.com/fontawesome/4.5.0/font-awesome.min.css"
-  rel="stylesheet"
-/>
-    <script>
-      // Configuration globale de l'API
-      window.API_BASE_URL = 'https://newsfootbackend-production.up.railway.app';
-    </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <script src="a.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <style>
       :root {
         --primary-color: #2563eb;
@@ -356,47 +342,6 @@
           transform: rotate(360deg);
         }
       }
-
-      .action-buttons {
-        display: flex;
-        gap: 0.5rem;
-        justify-content: flex-start;
-      }
-
-      .action-buttons button {
-        padding: 0.5rem;
-        border: none;
-        border-radius: 0.375rem;
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-      }
-
-      .action-buttons .edit-button {
-        background-color: rgba(37, 99, 235, 0.1);
-        color: var(--primary-color);
-      }
-
-      .action-buttons .edit-button:hover {
-        background-color: rgba(37, 99, 235, 0.2);
-      }
-
-      .action-buttons .delete-button {
-        background-color: rgba(239, 68, 68, 0.1);
-        color: var(--danger-color);
-      }
-
-      .action-buttons .delete-button:hover {
-        background-color: rgba(239, 68, 68, 0.2);
-      }
-
-      .action-buttons button i {
-        font-size: 0.875rem;
-      }
     </style>
     <script>
       // Vérification de l'authentification
@@ -413,9 +358,9 @@
     <nav class="navbar-vgeux">
       <div class="nav-logo">News Foot</div>
       <ul class="nav-links">
-        <li><a href="a.html">ACCUEIL</a></li>
-        <li><a href="a.html#articles">ARTICLES</a></li>
-        <li><a href="a.html#videos">VIDEOS</a></li>
+        <li><a href="index.html">ACCUEIL</a></li>
+        <li><a href="index.html#articles">ARTICLES</a></li>
+        <li><a href="index.html#videos">VIDEOS</a></li>
         <li><a href="#" id="logoutButton"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
       </ul>
     </nav>
@@ -675,34 +620,90 @@
           </div>
         </div>
 
-        <footer>
-          <div class="footer">
-            <div class="row">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-instagram"></i></a>
-              <a href="#"><i class="fa fa-youtube"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-            </div>
-    
-            <div class="row">
-              <ul>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Our Services</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Career</a></li>
-                <li>
-                  <a href="login.html">Se connecter en tant qu'admin</a>
-                </li>
-              </ul>
-            </div>
-    
-            <div class="row">
-              INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By:
-              Mahesh
-            </div>
+    <footer class="footer">
+      <div
+        class="container"
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 2rem;
+        "
+      >
+        <!-- Logo/Nom -->
+        <div
+          style="
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+          "
+        >
+          <span
+            style="
+              font-weight: bold;
+              font-size: 1.25rem;
+              color: #1e293b;
+              letter-spacing: 1px;
+            "
+            >Football News</span
+          >
+        </div>
+        <!-- Liens -->
+        <nav
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+          "
+        >
+          <div style="display: flex; gap: 2rem">
+            <a
+              href="index.html#news"
+              style="color: #1e293b; text-decoration: none; font-weight: 500"
+              >News</a
+            >
+            <a
+              href="index.html#histoire"
+              style="color: #1e293b; text-decoration: none; font-weight: 500"
+              >Histoire</a
+            >
+            <a
+              href="index.html#videos"
+              style="color: #1e293b; text-decoration: none; font-weight: 500"
+              >Vidéos</a
+            >
           </div>
-        </footer>
+        </nav>
+        <!-- Contact -->
+        <div
+          style="
+            min-width: 220px;
+            text-align: right;
+            color: #334155;
+            font-size: 1rem;
+          "
+        >
+          <div><strong>Contact</strong></div>
+          <div>📞 01 23 45 67 89</div>
+          <div>✉️ contact@footballnews.fr</div>
+          <div>🏢 10 rue du Stade, 75000 Paris</div>
+        </div>
+      </div>
+      <div
+        style="
+          text-align: center;
+          color: #64748b;
+          font-size: 0.98rem;
+          margin-top: 1.5rem;
+        "
+      >
+        &copy; 2024 Football News. Tous droits réservés.
+      </div>
+    </footer>
 
     <script src="admin.js"></script>
     <script>
@@ -737,7 +738,8 @@
     <script>
       async function updateDashboardStats() {
         const token = localStorage.getItem("token");
-        // Utilisation de la variable globale
+        const API_BASE_URL = "https://newsfootbackend-production.up.railway.app";
+
         if (!token) {
           console.error("Pas de token trouvé dans le localStorage");
           return;
@@ -747,7 +749,7 @@
           console.log("Début de la récupération des statistiques...");
           
           // Test de la validité du token
-          const testResponse = await fetch(`${window.API_BASE_URL}/api/articles`, {
+          const testResponse = await fetch(`${API_BASE_URL}/api/articles`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           
@@ -756,7 +758,7 @@
           }
 
           const [articles, videos, authors, categories] = await Promise.all([
-            fetch(`${window.API_BASE_URL}/api/articles`, {
+            fetch(`${API_BASE_URL}/api/articles`, {
               headers: { Authorization: `Bearer ${token}` },
             }).then(async (r) => {
               if (!r.ok) throw new Error(`Erreur articles: ${r.status}`);
@@ -764,7 +766,7 @@
               console.log("Articles reçus:", data);
               return data;
             }),
-            fetch(`${window.API_BASE_URL}/api/videos`, {
+            fetch(`${API_BASE_URL}/api/videos`, {
               headers: { Authorization: `Bearer ${token}` },
             }).then(async (r) => {
               if (!r.ok) throw new Error(`Erreur videos: ${r.status}`);
@@ -772,15 +774,15 @@
               console.log("Videos reçues:", data);
               return data;
             }),
-            fetch(`${window.API_BASE_URL}/api/auteurs`, {
+            fetch(`${API_BASE_URL}/api/auteurs`, {
               headers: { Authorization: `Bearer ${token}` },
             }).then(async (r) => {
               if (!r.ok) throw new Error(`Erreur auteurs: ${r.status}`);
               const data = await r.json();
-              console.log("Auteurs reçus pour affichage:", data);
+              console.log("Auteurs reçus:", data);
               return data;
             }),
-            fetch(`${window.API_BASE_URL}/api/categories`, {
+            fetch(`${API_BASE_URL}/api/categories`, {
               headers: { Authorization: `Bearer ${token}` },
             }).then(async (r) => {
               if (!r.ok) throw new Error(`Erreur categories: ${r.status}`);
@@ -814,8 +816,6 @@
       }
       document.addEventListener("DOMContentLoaded", updateDashboardStats);
     </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', init);
-    </script>
   </body>
 </html>
+

@@ -4,40 +4,85 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Article - Football News</title>
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-      :root {
-        --accent-color: #3b82f6;
-        --bg-dark: #000;
-        --bg-card: #181818;
-        --text-primary: #fff;
-        --text-secondary: #b0b0b0;
-        --border-color: #222;
-        --bg-light: #f8fafc;
-        --bg-card-light: #e5e7eb;
-        --text-primary-light: #1e293b;
-        --text-secondary-light: #334155;
-        --border-color-light: #cbd5e1;
-      }
+    <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Custom CSS -->
 
-      body[data-theme="light"] {
-        --bg-dark: #f8fafc;
-        --bg-card: #fff;
-        --text-primary: #1e293b;
-        --text-secondary: #334155;
-        --border-color: #cbd5e1;
-      }
+  <!-- Font Awesome Icons -->
+  <link
+    href="https://opensource.keycdn.com/fontawesome/4.5.0/font-awesome.min.css"
+    rel="stylesheet"
+  />
+  <!-- Custom JavaScript -->
+  <script src="./a.js"></script>
+</head>
 
-      html,
-      body {
-        background: var(--bg-dark) !important;
-        color: var(--text-primary) !important;
+<body id="page-top">
+  <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button
+          type="button"
+          class="navbar-toggle collapsed"
+          data-toggle="collapse"
+          data-target=".navbar-collapse"
+        >
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top">News Foot</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="page-scroll" href="a.html">ACCUEIL</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#articles">ARTICLES</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#videos">VIDEOS</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              id="logoutButton"
+              class="logout-button"
+              style="display: none"
+            >
+              <i class="fa fa-sign-out"></i> Déconnexion
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <style>
+      html, body {
+        background: #f8fafc;
+        color: #1e293b;
         min-height: 100vh;
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, sans-serif;
+        font-family: 'Montserrat', Arial, sans-serif;
         line-height: 1.6;
         margin: 0;
         padding: 0;
+        font-size: 1.07rem;
       }
 
       .container {
@@ -70,7 +115,60 @@
         align-items: center;
         gap: 0.5rem;
       }
-
+      .footer{
+        background:#000;
+        padding:30px 0px;
+        font-family: 'Play', sans-serif;
+        text-align:center;
+        font-size: 1rem;
+      }
+    
+    .footer .row{
+    width:100%;
+    margin:1% 0%;
+    padding:0.6% 0%;
+    color:gray;
+    font-size:0.8em;
+    }
+    
+    .footer .row a{
+    text-decoration:none;
+    color:gray;
+    transition:0.5s;
+    }
+    
+    .footer .row a:hover{
+    color:#fff;
+    }
+    
+    .footer .row ul{
+    width:100%;
+    }
+    
+    .footer .row ul li{
+    display:inline-block;
+    margin:0px 30px;
+    }
+    
+    .footer .row a i{
+    font-size:2em;
+    margin:0% 1%;
+    }
+    
+    @media (max-width:720px){
+    .footer{
+    text-align:left;
+    padding:5%;
+    }
+    .footer .row ul li{
+    display:block;
+    margin:10px 0px;
+    text-align:left;
+    }
+    .footer .row a i{
+    margin:0% 3%;
+    }
+    }
       .logo-icon {
         display: flex;
         align-items: center;
@@ -90,161 +188,7 @@
         color: #fff;
       }
 
-      .nav-links.nav-right {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .nav-links.nav-right a {
-        color: #111;
-        background: none;
-        font-size: 1.08rem;
-        font-weight: 500;
-        border: none;
-        border-radius: 0;
-        text-decoration: none !important;
-        padding: 0.5rem 0.7rem;
-        position: relative;
-        transition: none;
-        cursor: pointer;
-      }
-
-      body[data-theme="dark"] .nav-links.nav-right a {
-        color: #fff;
-      }
-
-      .nav-links.nav-right a::after {
-        display: none !important;
-      }
-
-      .burger-btn {
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1001;
-        margin-left: 0.5rem;
-      }
-
-      .burger-bar {
-        width: 24px;
-        height: 3px;
-        background: #111;
-        margin: 3px 0;
-        border-radius: 2px;
-        transition: background 0.2s;
-      }
-
-      body[data-theme="dark"] .burger-bar {
-        background: #fff;
-      }
-
-      @media (max-width: 800px) {
-        .nav-links.nav-right {
-          gap: 0.7rem;
-        }
-      }
-
-      @media (max-width: 700px) {
-        .burger-btn {
-          display: flex;
-        }
-
-        .nav-menu {
-          position: fixed;
-          top: 0;
-          right: 0;
-          width: 80vw;
-          max-width: 340px;
-          height: 100vh;
-          background: #f8fafc;
-          box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
-          border-top-left-radius: 18px;
-          border-bottom-left-radius: 18px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: flex-start;
-          transform: translateX(100vw);
-          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          z-index: 1000;
-        }
-
-        body[data-theme="dark"] .nav-menu {
-          background: #181818;
-        }
-
-        .nav-menu.open {
-          transform: translateX(0);
-        }
-
-        .nav-links.nav-right {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 2rem;
-          margin-top: 5rem;
-          width: 100%;
-        }
-
-        .nav-links.nav-right li {
-          width: 100%;
-          text-align: left;
-        }
-
-        .nav-links.nav-right a,
-        .nav-links.nav-right button {
-          width: 100%;
-          font-size: 1.2rem;
-          padding: 1.1rem 0 1.1rem 1.2rem;
-          border-radius: 8px;
-          box-shadow: none;
-          color: #111 !important;
-          background: none;
-          text-align: left;
-        }
-
-        body[data-theme="dark"] .nav-links.nav-right a,
-        body[data-theme="dark"] .nav-links.nav-right button {
-          color: #fff !important;
-        }
-      }
-
-      @media (min-width: 701px) {
-        .nav-menu {
-          position: static;
-          transform: none;
-          background: none;
-          height: auto;
-          width: auto;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-        }
-
-        .nav-links.nav-right {
-          flex-direction: row;
-          gap: 1.5rem;
-          margin-top: 0;
-        }
-      }
-
-      /* Footer styles */
-      .footer {
-        background: #fff;
-        box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.06);
-        padding: 2.5rem 0 1.5rem 0;
-        margin-top: 4rem;
-      }
-
+     
       .article-detail {
         max-width: 900px;
         margin: 2rem auto;
@@ -259,8 +203,9 @@
       }
 
       .article-title {
-        font-size: 2.5rem;
-        color: var(--text-primary);
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1a237e;
         margin-bottom: 1rem;
         line-height: 1.2;
       }
@@ -268,10 +213,26 @@
       .article-meta {
         display: flex;
         align-items: center;
-        gap: 1.5rem;
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-        margin-bottom: 1.5rem;
+        gap: 1rem;
+        color: #555;
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .article-author {
+        font-weight: 600;
+        color: #2563eb;
+      }
+
+      .article-category {
+        background: #e0e7ff;
+        color: #3730a3;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        padding: 0.2rem 0.9rem;
+        margin-left: 0.5rem;
       }
 
       .article-image {
@@ -349,56 +310,30 @@
     </style>
   </head>
   <body data-theme="light">
-    <nav
-      class="navbar minimal-navbar"
-      style="background: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08)"
-    >
-      <div class="container nav-flex" style="justify-content: flex-end">
-        <div class="navbar-logo logo-left" style="margin-right: auto">
-          <span class="logo-icon" id="logoIcon"></span>
-          <span class="logo-text" style="color: #111">Football News</span>
-        </div>
-        <button class="burger-btn" id="burgerBtn" aria-label="Menu">
-          <span class="burger-bar"></span>
-          <span class="burger-bar"></span>
-          <span class="burger-bar"></span>
-        </button>
-        <div
-          class="nav-menu"
-          id="navMenu"
-          style="background: #fff; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1)"
-        >
-          <ul
-            class="nav-links nav-right"
-            id="navLinks"
-            style="justify-content: flex-end"
-          >
-            <li><a href="index.html#news" style="color: #111">News</a></li>
-            <li>
-              <a href="index.html#histoire" style="color: #111">Histoire</a>
-            </li>
-            <li><a href="index.html#videos" style="color: #111">Vidéos</a></li>
-            <li>
-              <a
-                href="admin.html"
-                id="adminLink"
-                style="display: none; color: #111"
-                >Administration</a
-              >
-            </li>
-            <li>
-              <a href="#" id="logoutButton" style="display: none; color: #111"
-                >Déconnexion</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    
     <div class="container">
-      <a href="index.html" class="back-button">← Retour aux articles</a>
+      
       <div class="article-detail" id="articleDetail">
-        <!-- Le contenu de l'article sera injecté ici dynamiquement -->
+        <article>
+          <div class="container">
+            <div class="article-content-wrapper">
+              <h1 class="article-title">Kylian Mbappé, l'icône d'une génération</h1>
+              <div class="article-meta">
+                <span class="article-author"><i class="fa fa-user"></i> Marie Dubois</span>
+                <span>•</span>
+                <span>15 juin 2025</span>
+                <span>•</span>
+                <span class="article-category">Ligue 1</span>
+              </div>
+              <div class="article-description">
+                <p>Kylian Mbappé continue d'écrire l'histoire du football français. À seulement 26 ans, il a déjà remporté de nombreux titres avec le Paris Saint-Germain et l'équipe de France, devenant une véritable légende vivante.</p>
+                <p>Son influence dépasse largement les terrains. Modèle pour la jeunesse, ambassadeur de causes sociales, Mbappé incarne la réussite, la détermination et l'humilité. Son départ annoncé pour un grand club européen suscite déjà l'émotion chez les supporters parisiens.</p>
+                <p>Mais au-delà des statistiques, c'est son style de jeu explosif, sa vitesse et sa capacité à faire basculer un match qui fascinent. Le football français n'a jamais eu une telle star depuis Zinédine Zidane.</p>
+                <p>Le futur s'annonce radieux pour Mbappé, qui inspire une nouvelle génération de footballeurs et de fans à travers le monde.</p>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
     <div class="loading-overlay" id="loadingOverlay">
@@ -407,33 +342,34 @@
     <div class="error-message" id="errorMessage">
       <!-- Erreur message will be injected here -->
     </div>
-    <footer class="footer">
-      <div class="footer-content">
-        <a href="index.html" class="footer-logo">
-          <span class="footer-logo-icon">FN</span>
-          <span class="footer-logo-text">Football News</span>
-        </a>
-        <ul class="footer-links">
-          <li><a href="index.html#news">News</a></li>
-          <li><a href="index.html#histoire">Histoire</a></li>
-          <li><a href="index.html#videos">Vidéos</a></li>
-        </ul>
-        <a href="login.html" class="admin-login-btn" id="adminLoginBtn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
-            />
-          </svg>
-          Administration
-        </a>
+    <footer>
+      <div class="footer">
+        <div class="row">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-youtube"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+        </div>
+
+        <div class="row">
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Career</a></li>
+            <li>
+              <a href="login.html" 
+                >Se connecter en tant qu'admin</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="row">
+          INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By:
+          Mahesh
+        </div>
       </div>
     </footer>
     <script>
