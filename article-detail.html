@@ -28,7 +28,7 @@
   <script src="./a.js"></script>
 </head>
 
-<body id="page-top">
+<body id="page-top"> 
   <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,7 +48,7 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse" >
         <ul class="nav navbar-nav navbar-right">
           <li>
             <a class="page-scroll" href="a.html">ACCUEIL</a>
@@ -74,6 +74,7 @@
     </div>
   </nav>
   <style>
+    
       html, body {
         background: #f8fafc;
         color: #1e293b;
@@ -83,6 +84,12 @@
         margin: 0;
         padding: 0;
         font-size: 1.07rem;
+      }
+      .navbar {
+        background: rgba(0, 0, 0, 0.522);
+        -webkit-transition: all 0.35s;
+        -moz-transition: all 0.35s;
+        transition: all 0.35s;
       }
 
       .container {
@@ -306,6 +313,12 @@
           align-items: flex-start;
           gap: 0.5rem;
         }
+      }
+
+      .navbar-default .navbar-nav > li > a,
+      .navbar-default .navbar-brand,
+      .navbar-default .navbar-nav > li > a .fa {
+        color: rgba(255, 213, 0, 0.9) !important;
       }
     </style>
   </head>
