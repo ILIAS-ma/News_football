@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>News Foot - Administration</title>
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
@@ -20,6 +20,7 @@
     />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="a.css" />
+    <link rel="stylesheet" href="styles.css" />
     <!-- Font Awesome Icons -->
     <link
       href="https://opensource.keycdn.com/fontawesome/4.5.0/font-awesome.min.css"
@@ -486,7 +487,7 @@
         font-size: 1.1rem;
         border: 1.5px solid #b0b0b0;
         border-radius: 7px;
-        background: #f8fafc;
+  
         color: #1e293b;
         margin-bottom: 0.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -557,6 +558,11 @@
         }
         .article-title {
           font-size: 1.3rem;
+          margin-top: 4rem !important;
+        }
+        h1 {
+          font-size: 1.3rem !important;
+          margin-top: 2.5rem !important;
         }
       }
       .navbar-default .navbar-nav > li > a,
@@ -571,6 +577,26 @@
       @media (max-width: 768px) {
         .navbar-default .navbar-nav > li > a,
         .navbar-default .navbar-nav > li > a .fa {
+          color: #222 !important;
+        }
+      }
+      /* News Foot en jaune et gras */
+      .navbar-vgeux .nav-logo {
+        color: #ffd500 !important;
+        font-weight: 700 !important;
+      }
+
+      /* Liens en noir et gras sur desktop */
+      .navbar-vgeux .nav-links a,
+      .navbar-vgeux .nav-links a .fa {
+        color: #222 !important;
+        font-weight: 600 !important;
+      }
+
+      /* Liens en noir sur mobile (optionnel, déjà noir) */
+      @media (max-width: 768px) {
+        .navbar-vgeux .nav-links a,
+        .navbar-vgeux .nav-links a .fa {
           color: #222 !important;
         }
       }

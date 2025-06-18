@@ -29,8 +29,9 @@
   /* Colonne Image */
   .login-image-column {
     flex: 1;
-    background: url('./image/logo\ pfe.jpg') no-repeat center center;
+    background-image: url('https://i.ibb.co/3YQ1v6r9/upscalemedia-transformed.jpg');
     background-size: cover;
+    background-position: center;
     position: relative;
   }
   
@@ -132,4 +133,24 @@
   .login-image-column .overlay p {
     font-size: 1.1rem;
   }
+}
+
+/* News Foot en jaune et gras */
+.navbar-vgeux .nav-logo {
+  color: #ffd500 !important;
+  font-weight: 700 !important;
+}
+
+/* Liens en noir et gras */
+.navbar-vgeux .nav-links a,
+.navbar-vgeux .nav-links a .fa {
+  color: #222 !important;
+  font-weight: 600 !important;
+}
+
+/* FORCE la couleur noire sur les liens de la navbar dashboard */
+.navbar-vgeux .nav-links a,
+.navbar-vgeux .nav-links a .fa {
+  color: #222 !important;
+  font-weight: 600 !important;
 }

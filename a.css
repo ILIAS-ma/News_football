@@ -5,7 +5,9 @@
   --font-size-base: 16px;
   --line-height-base: 1.5;
 }
-
+.navbar-brand page-scroll{
+  color: rgba(255, 213, 0, 0.9);
+}
 /* Reset et styles de base */
 * {
   margin: 0;
@@ -297,6 +299,7 @@ label {
   
   header h1 {
       font-size: 60px;
+      
   }
   
   .header-content {
@@ -313,7 +316,7 @@ label {
   
   .navbar-default .navbar-brand,
   .navbar-default .navbar-nav>li>a {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 213, 0, 0.9);
     font-weight: 700;
     -webkit-transition: all .35s;
     -moz-transition: all 0.35s;
@@ -563,6 +566,13 @@ label {
   .video-title {
     font-size: 1.1rem;
   }
+
+  .navbar-vgeux .nav-links a {
+    color: rgba(255, 213, 0, 0.9) !important;
+  }
+  .navbar-vgeux .nav-logo {
+    color: rgba(255, 213, 0, 0.9) !important;
+  }
 }
 
 /* Navigation */
@@ -774,4 +784,9 @@ label {
   .form-group label {
     font-size: 0.97rem;
   }
+}
+
+.navbar-vgeux .nav-links a,
+.navbar-vgeux .nav-logo {
+  color: rgba(255, 213, 0, 0.9) !important;
 }

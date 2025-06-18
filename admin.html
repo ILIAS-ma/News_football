@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>News Foot - Administration</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="a.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="" />
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -257,15 +257,18 @@
         color: var(--text-primary);
       }
 
-      .form-group input,
       .form-group select,
+      .form-group input,
       .form-group textarea {
         width: 100%;
-        padding: 0.75rem;
-        border: 1px solid var(--border-color);
-        border-radius: 0.5rem;
-        font-size: 1rem;
-        transition: var(--transition);
+        padding: 0.9rem 1.2rem;
+        font-size: 1.1rem;
+        border: 1.5px solid #b0b0b0;
+        border-radius: 7px;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        transition: border-color 0.2s;
       }
 
       .form-group input:focus,
@@ -694,7 +697,6 @@
         padding: 2rem 1rem 1rem 1rem;
         text-align: center;
         width: 100%;
-        margin-top: 2rem;
       }
       .footer .footer-socials {
         display: flex;
@@ -730,7 +732,6 @@
       .footer .footer-copy {
         color: #bdbdbd;
         font-size: 1rem;
-        margin-top: 0.5rem;
       }
       @media (max-width: 600px) {
         .footer .footer-links {
@@ -741,6 +742,62 @@
         .footer .footer-socials {
           font-size: 1.5rem;
           gap: 1.2rem;
+        }
+      }
+
+      .admin-navbar {
+        width: 100%;
+        background: #fff;
+        border-bottom: 1px solid #ececec;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2.5rem;
+        height: 64px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .admin-navbar .logo-text {
+        font-size: 1.2rem;
+        padding-left: 0.5rem;
+      }
+
+      .admin-navbar .nav-links {
+        gap: 1rem;
+        margin-right: 0.5rem;
+      }
+
+      .admin-navbar .nav-links a,
+      .admin-navbar .nav-links a .fa {
+        font-size: 0.95rem;
+        padding: 0.2rem 0.5rem;
+      }
+
+      .admin-navbar .nav-links a:hover,
+      .admin-navbar .nav-links a:focus {
+        color: #ffd500 !important;
+        background: #fffbe6;
+        text-decoration: none;
+      }
+
+      @media (max-width: 900px) {
+        .admin-navbar {
+          padding: 0 1rem;
+        }
+        .admin-navbar .logo-text {
+          font-size: 1.3rem;
+        }
+        .admin-navbar .nav-links {
+          gap: 1.2rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .article-title {
+          font-size: 1.3rem;
         }
       }
     </style>
@@ -756,13 +813,22 @@
     </script>
   </head>
   <body>
-    <nav class="navbar-vgeux">
-      <div class="nav-logo">News Foot</div>
-      <ul class="nav-links">
-        <li><a href="a.html">ACCUEIL</a></li>
-        <li><a href="a.html#articles">ARTICLES</a></li>
-        <li><a href="a.html#videos">VIDEOS</a></li>
-        <li><a href="#" id="logoutButton"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
+    <nav class="admin-navbar">
+      <div class="logo-text">News Foot</div>
+      <button class="burger-btn" aria-label="Ouvrir le menu" onclick="toggleNav()">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+      <ul class="nav-links nav-right" id="adminNavLinks">
+        <li><a class="page-scroll" href="a.html">ACCUEIL</a></li>
+        <li><a class="page-scroll" href="#articles">ARTICLES</a></li>
+        <li><a class="page-scroll" href="#videos">VIDEOS</a></li>
+        <li>
+          <a href="#" id="logoutButton" class="logout-button" style="display: none">
+            <i class="fa fa-sign-out"></i> Déconnexion
+          </a>
+        </li>
       </ul>
     </nav>
     <div style="height:56px;"></div>
@@ -1141,6 +1207,11 @@
     </script>
     <script>
       document.addEventListener('DOMContentLoaded', init);
+    </script>
+    <script>
+    function toggleNav() {
+      document.getElementById('adminNavLinks').classList.toggle('open');
+    }
     </script>
   </body>
 </html>
