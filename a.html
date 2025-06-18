@@ -45,7 +45,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand page-scroll" href="#page-top">News Foot</a>
+          <a
+            class="navbar-brand page-scroll"
+            href="#page-top"
+            style="color: rgba(255, 213, 0, 0.9)"
+            >News Foot</a
+          >
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -82,7 +87,6 @@
       <div class="header-content">
         <div class="header-content-inner">
           <h1>News Foot - Toute l'actualité du football</h1>
-          <hr />
         </div>
       </div>
     </header>
@@ -553,6 +557,21 @@
         }
         .article-title {
           font-size: 1.3rem;
+        }
+      }
+      .navbar-default .navbar-nav > li > a,
+      .navbar-default .navbar-nav > li > a .fa {
+        color: #fff !important;
+        font-weight: 600 !important;
+      }
+      .navbar-default .navbar-brand {
+        color: rgba(255, 213, 0, 0.9) !important;
+        font-weight: 700 !important;
+      }
+      @media (max-width: 768px) {
+        .navbar-default .navbar-nav > li > a,
+        .navbar-default .navbar-nav > li > a .fa {
+          color: #222 !important;
         }
       }
     </style>
